@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tunic Language Tool Prototype</title>
+    <link rel="stylesheet" type="text/css" href="./tunic-prototype.css">
+</head>
+<body>
+<div class="outer-grid" id="outerGrid">
+    <!-- Left Side (Nested Grid) -->
+    <div class="left-container" id="leftGrid">
+        <div class="alphabet-wrapper panel">
+            <div class="alphabet-header-row">
+                <div style="visibility: hidden">&nbsp;</div>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <div class="alphabet-outer-runes-subheader">Outer Runes</div>
+            <div class="alphabet-header-col">1</div>
+            <div id="cell-11" class="alphabet-cell outer-phonetic-rune">
+                <svg viewBox="0 0 85 165" id="cell-11-svg">
+                    <g class="inactive-edge">
+                        <line id="cell-11-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-11-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-11-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-11-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-11-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-11-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-11-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-11-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-11-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-11-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-11-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-11-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-11-E13" class="word-connector" x1="0" y1="80" x2="80" y2="80" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>a</span>
+                </div>
+            </div>
+            <div id="cell-12" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-12-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-12-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-12-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-12-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-12-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-12-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-12-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-12-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-12-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-12-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-12-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-12-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-12-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-12-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-13" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-13-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-13-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-13-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-13-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-13-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-13-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-13-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-13-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-13-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-13-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-13-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-13-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-13-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-13-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-14" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-14-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-14-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-14-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-14-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-14-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-14-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-14-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-14-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-14-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-14-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-14-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-14-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-14-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                    </g>
+                    <line id="cell-14-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-15" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-15-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-15-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-15-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-15-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-15-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-15-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-15-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-15-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-15-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-15-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-15-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-15-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-15-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                    </g>
+                    <line id="cell-15-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-16" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-16-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-16-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-16-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-16-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-16-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-16-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-16-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-16-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-16-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-16-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-16-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-16-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-16-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-16-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>u</span>
+                </div>
+            </div>
+            <div class="alphabet-header-col">2</div>
+            <div id="cell-21" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-21-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-21-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-21-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-21-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-21-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-21-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-21-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-21-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-21-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-21-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-21-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-21-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-21-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-21-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-22" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-22-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-22-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-22-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-22-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-22-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-22-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-22-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-22-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-22-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-22-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-22-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-22-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-22-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-22-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>t</span><hr><span>oo</span>
+                </div>
+            </div>
+            <div id="cell-23" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-23-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-23-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-23-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-23-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-23-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-23-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-23-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-23-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-23-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-23-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-23-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-23-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-23-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                    </g>
+                    <line id="cell-23-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-24" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-24-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-24-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-24-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-24-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-24-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-24-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-24-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-24-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-24-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-24-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-24-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-24-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-24-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-24-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-25" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-25-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-25-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-25-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-25-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-25-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-25-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-25-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-25-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-25-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-25-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-25-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-25-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-25-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-25-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-26" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-26-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-26-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-26-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-26-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-26-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-26-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-26-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-26-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-26-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-26-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-26-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-26-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-26-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-26-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div class="alphabet-header-col">3</div>
+            <div id="cell-31" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-31-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-31-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-31-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-31-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-31-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-31-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-31-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-31-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-31-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-31-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-31-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-31-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-31-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-31-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-32" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-32-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-32-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-32-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-32-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-32-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-32-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-32-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-32-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-32-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-32-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-32-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-32-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-32-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                    </g>
+                    <line id="cell-32-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-33" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-33-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-33-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-33-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-33-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-33-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-33-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-33-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-33-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-33-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-33-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-33-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-33-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-33-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-33-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-34" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-34-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-34-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-34-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-34-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-34-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-34-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-34-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-34-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-34-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-34-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-34-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-34-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-34-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                    </g>
+                    <line id="cell-34-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-35" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-35-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-35-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-35-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-35-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-35-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-35-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-35-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-35-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-35-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-35-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-35-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-35-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-35-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <line id="cell-35-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>f</span><hr/><span>O</span>
+                </div>
+            </div>
+            <div id="cell-36" class="alphabet-cell outer-phonetic-rune" >
+                <svg id="cell-36-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-36-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-36-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-36-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-36-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-36-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-36-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-36-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-36-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-36-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-36-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-36-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-36-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                    </g>
+                    <line id="cell-36-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div class="alphabet-inner-runes-subheader">Inner Runes</div>
+            <div class="alphabet-header-col">4</div>
+            <div id="cell-41" class="alphabet-cell inner-phonetic-rune">
+                <svg id="cell-41-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-41-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-41-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-41-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-41-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-41-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-41-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-41-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-41-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-41-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-41-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-41-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-41-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-41-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-42" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-42-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-42-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-42-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-42-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-42-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-42-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-42-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-42-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-42-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-42-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-42-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-42-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-42-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-42-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-43" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-43-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-43-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-43-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-43-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-43-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-43-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-43-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-43-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-43-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-43-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-43-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-43-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-43-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-43-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-44" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-44-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-44-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-44-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-44-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-44-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-44-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-44-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-44-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-44-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-44-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-44-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-44-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-44-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-44-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-45" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-45-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-45-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-45-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-45-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-45-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-45-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-45-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-45-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-45-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-45-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-45-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-45-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-45-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                    </g>
+                    <line id="cell-45-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-46" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-46-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-46-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-46-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-46-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-46-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-46-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-46-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-46-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-46-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-46-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-46-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-46-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-46-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-46-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div class="alphabet-header-col">5</div>
+            <div id="cell-51" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-51-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-51-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-51-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-51-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-51-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-51-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-51-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-51-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-51-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-51-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-51-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-51-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-51-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-51-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-52" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-52-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-52-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-52-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-52-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-52-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-52-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-52-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-52-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-52-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-52-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-52-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-52-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-52-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                    </g>
+                    <line id="cell-52-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-53" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-53-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-53-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-53-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-53-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-53-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-53-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-53-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-53-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-53-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-53-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-53-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-53-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-53-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-53-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-54" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-54-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-54-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-54-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-54-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-54-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-54-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-54-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-54-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-54-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-54-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-54-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-54-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-54-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-54-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-55" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-55-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-55-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-55-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-55-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-55-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-55-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-55-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-55-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-55-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-55-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-55-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-55-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-55-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-55-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-56" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-56-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-56-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-56-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-56-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-56-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-56-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-56-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-56-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-56-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-56-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-56-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-56-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-56-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-56-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div class="alphabet-header-col">6</div>
+            <div id="cell-61" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-61-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-61-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-61-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-61-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-61-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-61-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-61-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-61-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-61-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-61-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-61-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-61-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-61-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-61-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-62" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-62-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-62-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-62-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-62-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-62-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-62-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-62-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-62-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-62-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-62-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-62-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-62-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-62-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-62-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>th</span>
+                </div>
+            </div>
+            <div id="cell-63" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-63-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-63-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-63-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-63-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-63-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-63-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-63-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-63-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-63-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-63-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-63-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-63-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-63-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-63-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span><b>TH</b></span>
+                </div>
+            </div>
+            <div id="cell-64" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-64-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-64-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-64-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-64-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-64-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-64-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-64-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-64-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-64-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-64-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-64-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-64-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-64-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-64-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>S</span>
+                </div>
+            </div>
+            <div id="cell-65" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-65-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-65-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-65-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-65-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-65-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-65-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-65-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-65-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-65-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-65-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-65-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-65-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-65-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-65-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-66" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-66-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-66-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-66-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-66-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-66-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-66-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-66-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-66-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-66-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-66-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-66-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-66-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-66-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-66-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div class="alphabet-header-col">7</div>
+            <div id="cell-71" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-71-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-71-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-71-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-71-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-71-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-71-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-71-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-71-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-71-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-71-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-71-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-71-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-71-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-71-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-72" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-72-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-72-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-72-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-72-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-72-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-72-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-72-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-72-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-72-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-72-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-72-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-72-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-72-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-72-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-73" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-73-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-73-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-73-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-73-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-73-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-73-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-73-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-73-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-73-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-73-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-73-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-73-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-73-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-73-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-74" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-74-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-74-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-74-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-74-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-74-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-74-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-74-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-74-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-74-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-74-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-74-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-74-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-74-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-74-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+            <div id="cell-75" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-75-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-75-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-75-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-75-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-75-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-75-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-75-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-75-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-75-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-75-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                        <line id="cell-75-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-75-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-75-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <line id="cell-75-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+                <div class="alphabet-cell-supplemental">
+                    <span>w</span>
+                </div>
+            </div>
+            <div id="cell-76" class="alphabet-cell inner-phonetic-rune" >
+                <svg id="cell-76-svg" viewBox="0 0 85 165">
+                    <g class="inactive-edge">
+                        <line id="cell-76-E1" x1="40" y1="0" x2="80" y2="40"></line>
+                        <line id="cell-76-E2" x1="80" y1="40" x2="80" y2="120"></line>
+                        <line id="cell-76-E3" x1="40" y1="160" x2="80" y2="120"></line>
+                        <line id="cell-76-E4" x1="0" y1="120" x2="40" y2="160"></line>
+                        <line id="cell-76-E5" x1="0" y1="40" x2="0" y2="120"></line>
+                        <line id="cell-76-E6" x1="0" y1="40" x2="40" y2="0"></line>
+                        <line id="cell-76-E8" x1="40" y1="80" x2="80" y2="40"></line>
+                        <line id="cell-76-E9" x1="40" y1="80" x2="80" y2="120"></line>
+                        <line id="cell-76-E11" x1="0" y1="120" x2="40" y2="80"></line>
+                        <line id="cell-76-E12" x1="0" y1="40" x2="40" y2="80"></line>
+                    </g>
+                    <g class="active-edge">
+                        <line id="cell-76-E7" x1="40" y1="0" x2="40" y2="80"></line>
+                        <line id="cell-76-E10" x1="40" y1="80" x2="40" y2="160"></line>
+                    </g>
+                    <line id="cell-76-E13" x1="0" y1="80" x2="80" y2="80" class="word-connector" visibility="hidden"></line>
+                </svg>
+            </div>
+
+
+        </div>
+        <div class="resizer-h" id="h-resizer"></div>
+        <div class="panel">Bottom Left</div>
+    </div>
+
+    <!-- Main Vertical Splitter -->
+    <div class="resizer-v" id="v-resizer"></div>
+
+    <!-- Right Side -->
+    <div class="panel">Right Panel</div>
+</div>
+</body>
+<footer>
+    <script language="javascript" type="text/javascript">
+        const vResizer = document.getElementById('v-resizer');
+        const hResizer = document.getElementById('h-resizer');
+        const outerGrid = document.getElementById('outerGrid');
+        const leftGrid = document.getElementById('leftGrid');
+
+        // Vertical Resize (Left vs Right)
+        vResizer.addEventListener('mousedown', (e) => {
+            const onMouseMove = (e) => {
+                const newWidth = (e.clientX / outerGrid.clientWidth) * 100;
+                outerGrid.style.gridTemplateColumns = `${newWidth}% 5px 1fr`;
+            };
+            setupListeners(onMouseMove);
+        });
+
+        // Horizontal Resize (Top vs Bottom on the Left)
+        hResizer.addEventListener('mousedown', (e) => {
+            const onMouseMove = (e) => {
+                // Use the direct pixel Y-coordinate instead of a percentage
+                const newHeightPx = e.clientY;
+
+                // Ensure the height doesn't go below 0 or exceed the container height
+                if (newHeightPx > 0 && newHeightPx < leftGrid.clientHeight) {
+                    leftGrid.style.gridTemplateRows = `${newHeightPx}px 5px 1fr`;
+                }
+            };
+            setupListeners(onMouseMove);
+        });
+
+        // Helper to handle mouseup cleaning
+        function setupListeners(moveFunc) {
+            const onMouseUp = () => {
+                document.removeEventListener('mousemove', moveFunc);
+                document.removeEventListener('mouseup', onMouseUp);
+            };
+            document.addEventListener('mousemove', moveFunc);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+    </script>
+</footer>
+</html>

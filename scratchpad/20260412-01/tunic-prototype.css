@@ -1,0 +1,191 @@
+/* 1. Design Tokens (Theme)
+   ========================================================================== */
+:root {
+    /* Colors - Brand & Semantic */
+    --color-bg-main: #ffffff;
+    --color-border-subtle: rgba(0, 0, 0, 0.08);
+    --color-accent-gold: #ffec99;
+    --color-header-bg: #d3d3d3; /* lightgray */
+
+    /* Rune Type: Outer (Vowels/Consonants Group A) */
+    --color-outer-brand: rgb(189, 91, 200);
+    --color-outer-bg-alpha: rgba(189, 91, 200, 0.2);
+    --color-outer-hover-alpha: rgba(189, 91, 200, 0.7);
+
+    /* Rune Type: Inner (Vowels/Consonants Group B) */
+    --color-inner-brand: rgb(64, 224, 208);
+    --color-inner-bg-alpha: rgba(64, 224, 208, 0.2);
+    --color-inner-hover-alpha: rgba(64, 224, 208, 0.7);
+
+    /* Ink / Stroke */
+    --color-rune-active: #050d3a;
+    --color-rune-inactive-mix: 50%;
+
+    /* Spacing & Radii */
+    --spacing-xs: 2px;
+    --spacing-sm: 5px;
+    --spacing-md: 8px;
+    --radius-sm: 5px;
+    --radius-md: 15px;
+    --transition-speed: 0.2s ease;
+}
+
+/* 2. Modern Reset & Base
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Lock viewport for app-like feel */
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* 3. Layout: The Alphabet Grid
+   ========================================================================== */
+.alphabet-wrapper {
+    display: grid;
+    justify-self: start;
+    align-self: start;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+
+    /* Cols: Row ID, 6 content columns */
+    grid-template-columns: auto repeat(6, 1fr);
+    /* Rows: Column IDs, Outer subheader, 3 content rows, Inner subheader, 4 content rows */
+    grid-template-rows: auto auto repeat(3, 1fr) auto repeat(4, 1fr);
+}
+
+/* Shared Header Styles */
+.alphabet-header-row,
+.alphabet-outer-runes-subheader,
+.alphabet-inner-runes-subheader {
+    grid-column: 1 / 8;
+    min-height: 0;
+}
+
+.alphabet-header-row {
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+/* 4. Components: Runes & Cells
+   ========================================================================== */
+
+/* Header Cells */
+.alphabet-header-row div,
+.alphabet-header-col {
+    background-color: var(--color-header-bg);
+    border: 2px solid var(--color-accent-gold);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Rune Categories */
+.alphabet-outer-runes-subheader {
+    grid-row: 2 / 3;
+    background-color: var(--color-outer-brand);
+}
+
+.alphabet-inner-runes-subheader {
+    grid-row: 6 / 7;
+    background-color: var(--color-inner-brand);
+}
+
+/* The Individual Rune Card */
+.alphabet-cell {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md) var(--spacing-sm) 4px;
+
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-bg-main);
+    box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.1);
+
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    overflow: hidden;
+}
+
+.alphabet-cell:hover {
+    box-shadow: -4px 8px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px) translateX(5px);
+}
+
+/* Rune Variations */
+.outer-phonetic-rune { background-color: var(--color-outer-bg-alpha); }
+.outer-phonetic-rune:hover { background-color: var(--color-outer-hover-alpha); }
+
+.inner-phonetic-rune { background-color: var(--color-inner-bg-alpha); }
+.inner-phonetic-rune:hover { background-color: var(--color-inner-hover-alpha); }
+
+/* 5. SVG / Drawing Logic
+   ========================================================================== */
+.alphabet-cell svg {
+    display: block;
+    inline-size: auto;
+    block-size: auto;
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    overflow: visible;
+}
+
+.alphabet-cell svg g {
+    stroke-width: 6px;
+    stroke-linecap: round;
+}
+
+.alphabet-cell svg g.active-edge,
+.word-connector {
+    stroke: var(--color-rune-active);
+}
+
+/* Dynamic stroke color based on parent rune type */
+.outer-phonetic-rune svg g.inactive-edge {
+    stroke: color-mix(in srgb, var(--color-outer-brand), white var(--color-rune-inactive-mix));
+}
+
+.inner-phonetic-rune svg g.inactive-edge {
+    stroke: color-mix(in srgb, var(--color-inner-brand), white var(--color-rune-inactive-mix));
+}
+
+/* Supplemental labels/icons */
+.alphabet-cell-supplemental {
+    position: absolute;
+    inset-inline-end: 1em;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+}
+
+/* 6. Experimental
+   ========================================================================== */
+.outer-grid {
+    display: grid;
+    grid-template-columns: 60% 5px 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+.left-container {
+    display: grid;
+    grid-template-rows: 60vh 5px 1fr;
+    height: 100%;
+}
+
+.resizer-v { background: #cbd5e0; cursor: col-resize; }
+.resizer-h { background: #cbd5e0; cursor: row-resize; }
+.panel { background: #f7fafc; border: 1px solid #e2e8f0; overflow: auto; }

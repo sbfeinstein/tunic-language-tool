@@ -1,0 +1,135 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* prevent accidental scrolling */
+}
+
+.alphabet-wrapper {
+    display: grid;
+    width: 99vw;
+    height: 100vh;
+    /* Use auto sizing for header row and divide space equally amongst the rest */
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto repeat(3, 1fr) auto repeat(4, 1fr);
+    gap: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.alphabet-header-row {
+    grid-row: 1 / 2;
+    grid-column: 1 / 7;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    margin: 2px;
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.alphabet-outer-runes-subheader {
+    grid-row: 2 / 3;
+    grid-column: 1 / 7;
+    text-align: center;
+    min-height: 0;
+    padding: 2px;
+    border: 2px solid #ffec99;
+    background-color: rgb(189 91 200);
+}
+
+.outer-phonetic-rune {
+    background-color: rgba(189 91 200 / 0.2);
+}
+
+.outer-phonetic-rune svg g.inactive-edge {
+    stroke: color-mix(in srgb, rgb(189 91 200), white 70%);
+}
+
+.outer-phonetic-rune:hover {
+    background-color: rgba(189 91 200 / 0.7);
+}
+
+.alphabet-inner-runes-subheader {
+    grid-row: 6 / 7;
+    grid-column: 1 / 7;
+    text-align: center;
+    min-height: 0;
+    padding: 2px;
+    border: 2px solid #ffec99;
+    background-color: rgb(64 224 208);
+}
+
+.inner-phonetic-rune {
+    background-color: rgba(64 224 208 / 0.2);
+}
+
+.inner-phonetic-rune svg g.inactive-edge {
+    stroke: color-mix(in srgb, rgb(64 224 208), white 70%);
+}
+
+.inner-phonetic-rune:hover {
+    background-color: rgba(64 224 208 / 0.7);
+}
+
+.alphabet-header-row div, .alphabet-header-col div {
+    text-align: center;
+    color: lightslategray;
+    border: 2px solid #ffec99;
+    border-radius: 5px;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+.alphabet-cell {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 0;
+    position: relative;
+}
+
+.alphabet-cell:hover {
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.alphabet-cell svg {
+    width: auto;
+    overflow: visible;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    display: block; /* Removes baseline spacing */
+}
+
+.alphabet-cell svg g {
+    stroke-width: 6px;
+    stroke-linecap: round;
+}
+
+.alphabet-cell svg g.active-edge {
+    stroke: #050d3a;
+}
+
+.alphabet-cell-supplemental {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.word-connector {
+    stroke: #050d3a;
+}

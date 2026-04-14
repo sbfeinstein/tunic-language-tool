@@ -1,0 +1,87 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* prevent accidental scrolling */
+}
+
+.alphabet-wrapper {
+    display: grid;
+    width: 99vw;
+    height: 100vh;
+    /* Use auto sizing for header row and divide space equally amongst the rest */
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto repeat(7, 1fr);
+    gap: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.alphabet-header-row {
+    grid-row: 1 / 2;
+    grid-column: 1 / 7;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    margin: 2px;
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.alphabet-header-row div, .alphabet-header-col div {
+    text-align: center;
+    color: lightslategray;
+    border: 2px solid #ffec99;
+    border-radius: 5px;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+/* 4. Letter Cells */
+.alphabet-cell {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 4px 3px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 0;
+    position: relative;
+}
+
+.alphabet-cell:hover {
+    background-color: #f0f2f5;
+    box-shadow: 4px 3px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.alphabet-cell svg {
+    width: auto;
+    overflow: visible;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    display: block; /* Removes baseline spacing */
+}
+
+div.alphabet-cell svg g {
+    stroke-width: 6px;
+    stroke-linecap: round;
+}
+
+div.alphabet-cell svg g.active-edge {
+    stroke: #050d3a;
+}
+
+div.alphabet-cell svg g.inactive-edge {
+    stroke: rgb(235 235 235);
+}
