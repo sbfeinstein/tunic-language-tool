@@ -133,11 +133,21 @@ html, body {
 }
 
 /* Rune Variations */
-.outer-phonetic-rune { background-color: var(--color-outer-bg-alpha); }
-.outer-phonetic-rune:hover { background-color: var(--color-outer-hover-alpha); }
+.outer-phonetic-rune {
+    background-color: var(--color-outer-bg-alpha);
+}
 
-.inner-phonetic-rune { background-color: var(--color-inner-bg-alpha); }
-.inner-phonetic-rune:hover { background-color: var(--color-inner-hover-alpha); }
+.outer-phonetic-rune:hover {
+    background-color: var(--color-outer-hover-alpha);
+}
+
+.inner-phonetic-rune {
+    background-color: var(--color-inner-bg-alpha);
+}
+
+.inner-phonetic-rune:hover {
+    background-color: var(--color-inner-hover-alpha);
+}
 
 /* 5. SVG / Drawing Logic
    ========================================================================== */
@@ -193,9 +203,21 @@ html, body {
     height: 100%;
 }
 
-.resizer-v { background: #cbd5e0; cursor: col-resize; }
-.resizer-h { background: #cbd5e0; cursor: row-resize; }
-.panel { background: #f7fafc; border: 1px solid #e2e8f0; overflow: auto; }
+.resizer-v {
+    background: #cbd5e0;
+    cursor: col-resize;
+}
+
+.resizer-h {
+    background: #cbd5e0;
+    cursor: row-resize;
+}
+
+.panel {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    overflow: auto;
+}
 
 /* Sentence Panel Styles */
 .sentence-panel {
