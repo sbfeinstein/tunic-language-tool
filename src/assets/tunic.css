@@ -1,0 +1,68 @@
+:root {
+  --tlt-c-white: #ffffff;
+  --tlt-c-gray: #cbd5e0;
+  --tlt-c-black: #000000;
+
+  --tlt-c-outer: rgb(189, 91, 200);
+  --tlt-c-inner: rgb(64, 224, 208);
+}
+
+:root {
+  --color-background: var(--tlt-c-white);
+  --color-border-subtle: rgb(var(--tlt-c-black), 0.08);
+  --color-divider-bar: var(--tlt-c-gray);
+
+  --color-inner-runes: var(--tlt-c-inner);
+  --color-inner-runes-inactive: rgb(from var(--color-inner-runes) r g b /  var(--inactive-opacity));
+  --color-inner-runes-hover: rgb(from var(--color-inner-runes) r g b /  var(--hover-opacity));
+  --color-inner-runes-active: rgb(from var(--color-inner-runes) r g b /  var(--active-opacity));
+  --color-outer-runes: var(--tlt-c-outer);
+  --color-outer-runes-inactive: rgb(from var(--color-outer-runes) r g b /  var(--inactive-opacity));
+  --color-outer-runes-hover: rgb(from var(--color-outer-runes) r g b / var(--hover-opacity));
+  --color-outer-runes-active: rgb(from var(--color-outer-runes) r g b /  var(--active-opacity));
+
+  --color-outer-rune-line-active: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-black) var(--active-line-mix-percent));
+  --color-outer-rune-line-inactive: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-white) var(--inactive-line-mix-percent));
+  --color-inner-rune-line-active: color-mix(in srgb, var(--color-inner-runes), var(--tlt-c-black) var(--active-line-mix-percent));
+  --color-inner-rune-line-inactive: color-mix(in srgb, var(--color-inner-runes), var(--tlt-c-white) var(--inactive-line-mix-percent));
+
+  --color-shadow-subtle: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.2);
+  --color-shadow-active: rgba(0, 0, 0, 0.3);
+
+  --inactive-opacity: 0.2;
+  --hover-opacity: 0.7;
+  --active-opacity: 0.5;
+
+  --active-line-mix-percent: 40%;
+  --inactive-line-mix-percent: 60%;
+
+  --spacing-xs: 2px;
+  --spacing-sm: 5px;
+  --spacing-md: 8px;
+  --radius-sm: 5px;
+  --radius-md: 15px;
+  --transition-speed: 0.2s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  background: var(--color-background);
+}
+
+#app {
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: normal;
+  height: 100vh;
+  width: 100vw;
+}
+
+
