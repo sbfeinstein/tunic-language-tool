@@ -28,10 +28,6 @@ const possible_lines = [
   { id: 12, key: baseId + '-E12', x1: '0', y1: '40', x2: '40', y2: '80' },
 ]
 
-const rune_type_short = computed(() => {
-  return props.rune.type[0]
-})
-
 const rune_lines = computed(() => {
   return {
     active: possible_lines.filter((line) => {
@@ -68,14 +64,16 @@ const rune_lines = computed(() => {
         ></line>
       </g>
     </svg>
-    <div class="caption">
-      <span> {{ rune_type_short }}-{{ props.rune.id }}<br /> </span>
-    </div>
+    <div class="caption">{{ props.rune.id }}</div>
   </div>
 </template>
 
 <style>
+/* Card - General Styling
+   ========================================================================== */
+
 .card {
+  z-index: 1;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -94,41 +92,8 @@ const rune_lines = computed(() => {
   overflow: hidden;
 }
 
-.card.outer {
-  background-color: var(--color-outer-runes-inactive);
-}
-
-.card.inner {
-  background-color: var(--color-inner-runes-inactive);
-}
-
-.card:hover {
-  box-shadow: -4px 8px 5px var(--color-shadow-hover);
-  transform: translateY(-5px) translateX(5px);
-}
-
-.card.outer:hover {
-  background-color: var(--color-outer-runes-hover);
-}
-
-.card.inner:hover {
-  background-color: var(--color-inner-runes-hover);
-}
-
-.card:active {
-  box-shadow: 6px 4px 5px var(--color-shadow-active);
-  transform: translateY(2px) translateX(-2px);
-}
-
-.card.outer:active {
-  background-color: var(--color-outer-runes-active);
-}
-
-.card.inner:active {
-  background-color: var(--color-inner-runes-active);
-}
-
 .card svg {
+  z-index: 3;
   display: block;
   inline-size: auto;
   block-size: auto;
@@ -142,19 +107,81 @@ const rune_lines = computed(() => {
   stroke-linecap: round;
 }
 
-.card.outer svg g.active {
-  stroke: var(--color-outer-rune-line-active);
+.card:hover {
+  box-shadow: -4px 8px 5px var(--color-shadow-hover);
+  transform: translateY(-5px) translateX(5px);
 }
 
-.card.inner svg g.active {
-  stroke: var(--color-inner-rune-line-active);
+.card:active {
+  box-shadow: 6px 4px 5px var(--color-shadow-active);
+  transform: translateY(2px) translateX(-2px);
+}
+
+/* Card - Caption Styling
+   ========================================================================== */
+
+.caption {
+  z-index: 2;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  color: white;
+  padding: 2px 4px;
+  font-size: 11pt;
+  border-radius: 4px;
+}
+
+.outer .caption {
+  background-color: var(--color-outer-runes-inactive);
+}
+
+.inner .caption {
+  background-color: var(--color-inner-runes-inactive);
+}
+
+/* Card - Outer Rune Styling
+   ========================================================================== */
+
+.card.outer {
+  background-color: var(--color-outer-runes-inactive);
+}
+
+.card.outer svg g.active {
+  stroke: var(--color-outer-rune-line-active);
 }
 
 .card.outer svg g.inactive {
   stroke: var(--color-outer-rune-line-inactive);
 }
 
+.card.outer:hover {
+  background-color: var(--color-outer-runes-hover);
+}
+
+.card.outer:active {
+  background-color: var(--color-outer-runes-active);
+}
+
+/* Card - Inner Rune Styling
+   ========================================================================== */
+
+.card.inner {
+  background-color: var(--color-inner-runes-inactive);
+}
+
+.card.inner svg g.active {
+  stroke: var(--color-inner-rune-line-active);
+}
+
 .card.inner svg g.inactive {
   stroke: var(--color-inner-rune-line-inactive);
+}
+
+.card.inner:hover {
+  background-color: var(--color-inner-runes-hover);
+}
+
+.card.inner:active {
+  background-color: var(--color-inner-runes-active);
 }
 </style>

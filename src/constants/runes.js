@@ -225,8 +225,11 @@ export const RUNES = Object.freeze({
  * property for differentiating inner from outer runes).
  *
  * E.g.
+ *
  * EDGES_TO_RUNE_MAPS.outerEdges.get("4-5") // returns the outer rune with id = 5
+ *
  * EDGES_TO_RUNE_MAPS.outerEdges.has("5-4") // returns false
+ *
  * EDGES_TO_RUNE_MAPS.outerEdges.has("1-2-5") // returns false
  *
  * @type {{outerEdges: Map<string, {id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}>, innerEdges: Map<string, {id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}|{id: number, type: string, edges: Set<number>}>}}

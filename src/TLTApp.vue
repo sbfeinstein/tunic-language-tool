@@ -1,21 +1,19 @@
 <script setup>
-import HorizontalPanels from '@/components/HorizontalPanels.vue'
-import VerticalPanels from '@/components/VerticalPanels.vue'
+import VerticalSplitter from '@/components/VerticalSplitter.vue'
+import HorizontalSplitter from '@/components/HorizontalSplitter.vue'
 import RuneKeyboard from '@/components/RuneKeyboard.vue'
 </script>
 
 <template>
-  <HorizontalPanels left-initial-width="40%">
+  <VerticalSplitter left-initial-width="40%">
     <template #left>
-      <VerticalPanels topInitialHeight="60%">
-        <template #top>
-          <RuneKeyboard />
-        </template>
+      <HorizontalSplitter topInitialHeight="60%">
+        <template #top><RuneKeyboard /></template>
         <template #bottom>Letter Editor</template>
-      </VerticalPanels>
+      </HorizontalSplitter>
     </template>
     <template #right>Document</template>
-  </HorizontalPanels>
+  </VerticalSplitter>
 </template>
 
 <style scoped></style>
