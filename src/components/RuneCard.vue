@@ -125,18 +125,18 @@ const rune_lines = computed(() => {
   position: absolute;
   top: 7px;
   left: 7px;
-  color: white;
+  color: var(--color-caption);
   padding: 2px 4px;
   font-size: 11pt;
   border-radius: 4px;
 }
 
 .outer .caption {
-  background-color: var(--color-outer-runes-inactive);
+  background-color: var(--color-outer-rune-line-inactive);
 }
 
 .inner .caption {
-  background-color: var(--color-inner-runes-inactive);
+  background-color: var(--color-inner-rune-line-inactive);
 }
 
 /* Card - Outer Rune Styling

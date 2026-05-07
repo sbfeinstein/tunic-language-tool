@@ -9,20 +9,25 @@
 
 :root {
   --color-background: var(--tlt-c-white);
-  --color-border-subtle: rgb(var(--tlt-c-black), 0.08);
+
+  --color-border: rgb(from var(--tlt-c-black) r g b / 0.3);
+  --color-border-subtle: rgb(from var(--tlt-c-black) r g b / 0.1);
+
+  --color-caption: rgb(from var(--tlt-c-black) r g b / 0.3);
+
   --color-divider-bar: var(--tlt-c-gray);
+
+  --color-outer-runes: var(--tlt-c-outer);
+  --color-outer-runes-inactive: rgb(from var(--color-outer-runes) r g b /  var(--inactive-opacity));
+  --color-outer-runes-hover: rgb(from var(--color-outer-runes) r g b / var(--hover-opacity));
+  --color-outer-runes-active: rgb(from var(--color-outer-runes) r g b /  var(--active-opacity));
+  --color-outer-rune-line-active: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-black) var(--active-line-mix-percent));
+  --color-outer-rune-line-inactive: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-white) var(--inactive-line-mix-percent));
 
   --color-inner-runes: var(--tlt-c-inner);
   --color-inner-runes-inactive: rgb(from var(--color-inner-runes) r g b /  var(--inactive-opacity));
   --color-inner-runes-hover: rgb(from var(--color-inner-runes) r g b /  var(--hover-opacity));
   --color-inner-runes-active: rgb(from var(--color-inner-runes) r g b /  var(--active-opacity));
-  --color-outer-runes: var(--tlt-c-outer);
-  --color-outer-runes-inactive: rgb(from var(--color-outer-runes) r g b /  var(--inactive-opacity));
-  --color-outer-runes-hover: rgb(from var(--color-outer-runes) r g b / var(--hover-opacity));
-  --color-outer-runes-active: rgb(from var(--color-outer-runes) r g b /  var(--active-opacity));
-
-  --color-outer-rune-line-active: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-black) var(--active-line-mix-percent));
-  --color-outer-rune-line-inactive: color-mix(in srgb, var(--color-outer-runes), var(--tlt-c-white) var(--inactive-line-mix-percent));
   --color-inner-rune-line-active: color-mix(in srgb, var(--color-inner-runes), var(--tlt-c-black) var(--active-line-mix-percent));
   --color-inner-rune-line-inactive: color-mix(in srgb, var(--color-inner-runes), var(--tlt-c-white) var(--inactive-line-mix-percent));
 
