@@ -1,7 +1,8 @@
 <script setup>
 import { computed, reactive, useId, watch } from 'vue'
-import { RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
+import { EDGES_TO_RUNE_MAPS, RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
+import runeUtils from '@/utils/runeUtils.js'
 
 const props = defineProps({
   inputRune: {
@@ -47,25 +48,24 @@ const clearLines = () => {
   for (const value of linesMap.values()) {
     value.active = false
   }
-
 }
 
 /**
  * All possible lines in a Rune shape, including outer and inner runes.
  */
 const LINES = [
-  { id: '1', x1: '40', y1: '0', x2: '80', y2: '40' },
-  { id: '2', x1: '80', y1: '40', x2: '80', y2: '120' },
-  { id: '3', x1: '40', y1: '160', x2: '80', y2: '120' },
-  { id: '4', x1: '0', y1: '120', x2: '40', y2: '160' },
-  { id: '5', x1: '0', y1: '40', x2: '0', y2: '120' },
-  { id: '6', x1: '0', y1: '40', x2: '40', y2: '0' },
-  { id: '7', x1: '40', y1: '0', x2: '40', y2: '80' },
-  { id: '8', x1: '40', y1: '80', x2: '80', y2: '40' },
-  { id: '9', x1: '40', y1: '80', x2: '80', y2: '120' },
-  { id: '10', x1: '40', y1: '80', x2: '40', y2: '160' },
-  { id: '11', x1: '0', y1: '120', x2: '40', y2: '80' },
-  { id: '12', x1: '0', y1: '40', x2: '40', y2: '80' },
+  { id: '1', x1: '40', y1: '0', x2: '80', y2: '40', type: 'outer' },
+  { id: '2', x1: '80', y1: '40', x2: '80', y2: '120', type: 'outer' },
+  { id: '3', x1: '40', y1: '160', x2: '80', y2: '120', type: 'outer' },
+  { id: '4', x1: '0', y1: '120', x2: '40', y2: '160', type: 'outer' },
+  { id: '5', x1: '0', y1: '40', x2: '0', y2: '120', type: 'outer' },
+  { id: '6', x1: '0', y1: '40', x2: '40', y2: '0', type: 'outer' },
+  { id: '7', x1: '40', y1: '0', x2: '40', y2: '80', type: 'inner' },
+  { id: '8', x1: '40', y1: '80', x2: '80', y2: '40', type: 'inner' },
+  { id: '9', x1: '40', y1: '80', x2: '80', y2: '120', type: 'inner' },
+  { id: '10', x1: '40', y1: '80', x2: '40', y2: '160', type: 'inner' },
+  { id: '11', x1: '0', y1: '120', x2: '40', y2: '80', type: 'inner' },
+  { id: '12', x1: '0', y1: '40', x2: '40', y2: '80', type: 'inner' },
 ]
 
 const baseId = useId()
@@ -85,6 +85,20 @@ const runeLines = computed(() => {
     active: active,
     inactive: inactive,
   }
+})
+
+const matchingOuterRune = computed(() => {
+  const activeOuterEdges = new Set(
+    runeLines.value.active.filter((line) => line.type === 'outer').map((line) => line.id),
+  )
+  return EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeOuterEdges))
+})
+
+const matchingInnerRune = computed(() => {
+  const activeInnerEdges = new Set(
+    runeLines.value.active.filter((line) => line.type === 'inner').map((line) => line.id),
+  )
+  return EDGES_TO_RUNE_MAPS.innerEdges.get(runeUtils.keyForEdges(activeInnerEdges))
 })
 </script>
 
@@ -119,8 +133,12 @@ const runeLines = computed(() => {
         </svg>
       </div>
     </div>
-    <div style="width: 150px">FOO</div>
-    <div style="width: 150px">BAR</div>
+    <div style="width: 150px">
+      {{ matchingOuterRune ? 'outer-' + matchingOuterRune.id : 'No Match' }}
+    </div>
+    <div style="width: 150px">
+      {{ matchingInnerRune ? 'inner-' + matchingInnerRune.id : 'No Match' }}
+    </div>
   </div>
 </template>
 
@@ -129,7 +147,7 @@ const runeLines = computed(() => {
   align-self: self-start;
   display: grid;
   gap: var(--spacing-sm);
-  grid-template-columns: minmax(200px, 2fr) 1fr 1fr;
+  grid-template-columns: minmax(280px, 2fr) 1fr 1fr;
   height: 100%;
   justify-self: start;
   padding: var(--spacing-sm);
@@ -175,13 +193,13 @@ const runeLines = computed(() => {
 }
 
 .rune-container svg#rune g {
-  stroke-width: 6px;
+  stroke-width: 8px;
   stroke-linecap: round;
   cursor: pointer;
 }
 
-.rune-container svg#rune g line {
-  filter: drop-shadow(4px 6px 4px var(--color-shadow-active));
+.rune-container svg#rune g {
+  filter: drop-shadow(3px 2px 1px var(--color-shadow-active));
 }
 
 .rune-container svg#rune g.active {
@@ -211,11 +229,12 @@ i {
 i svg {
   stroke: var(--tlt-c-gray);
   fill: transparent;
-  stroke-width: 3px;
+  stroke-width: 4px;
   filter: drop-shadow(3px 2px 1px var(--color-shadow-active));
 }
 
 i svg *:hover {
   stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
+  cursor: pointer;
 }
 </style>
