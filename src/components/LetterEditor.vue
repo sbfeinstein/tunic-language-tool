@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, useId, watch } from 'vue'
 import { RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
+import ClearIcon from './icons/IconClear.vue'
 
 const props = defineProps({
   inputRune: {
@@ -40,6 +41,13 @@ const toggleLine = (lineID) => {
   if (existingLine) {
     existingLine.active = !existingLine.active
   }
+}
+
+const clearLines = () => {
+  for (const value of linesMap.values()) {
+    value.active = false
+  }
+
 }
 
 /**
@@ -83,30 +91,33 @@ const runeLines = computed(() => {
 <template>
   <div class="editor-grid">
     <div class="editor">
-      <svg viewBox="0 0 85 165">
-        <g class="inactive">
-          <line
-            v-for="line in runeLines.inactive"
-            :x1="line.x1"
-            :x2="line.x2"
-            :y1="line.y1"
-            :y2="line.y2"
-            :key="line.key"
-            @click="toggleLine(line.id)"
-          ></line>
-        </g>
-        <g class="active">
-          <line
-            v-for="line in runeLines.active"
-            :x1="line.x1"
-            :x2="line.x2"
-            :y1="line.y1"
-            :y2="line.y2"
-            :key="line.key"
-            @click="toggleLine(line.id)"
-          ></line>
-        </g>
-      </svg>
+      <div class="rune-container">
+        <i><ClearIcon @click="clearLines()" /></i>
+        <svg id="rune" viewBox="0 0 85 165">
+          <g class="inactive">
+            <line
+              v-for="line in runeLines.inactive"
+              :x1="line.x1"
+              :x2="line.x2"
+              :y1="line.y1"
+              :y2="line.y2"
+              :key="line.key"
+              @click="toggleLine(line.id)"
+            ></line>
+          </g>
+          <g class="active">
+            <line
+              v-for="line in runeLines.active"
+              :x1="line.x1"
+              :x2="line.x2"
+              :y1="line.y1"
+              :y2="line.y2"
+              :key="line.key"
+              @click="toggleLine(line.id)"
+            ></line>
+          </g>
+        </svg>
+      </div>
     </div>
     <div style="width: 150px">FOO</div>
     <div style="width: 150px">BAR</div>
@@ -118,7 +129,7 @@ const runeLines = computed(() => {
   align-self: self-start;
   display: grid;
   gap: var(--spacing-sm);
-  grid-template-columns: minmax(250px, 1fr) auto auto;
+  grid-template-columns: minmax(200px, 2fr) 1fr 1fr;
   height: 100%;
   justify-self: start;
   padding: var(--spacing-sm);
@@ -126,46 +137,85 @@ const runeLines = computed(() => {
 }
 
 .editor {
+  height: 100%;
+  min-height: 0; /* This is the "magic" line for grid/flex items */
+  display: flex;
+  flex-direction: column;
+}
+
+.rune-container {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-lg) var(--spacing-sm) 4px;
+
+  /* Add these */
+  flex: 1;
+  min-height: 0;
+  height: 100%;
   overflow: hidden;
 }
 
-.editor svg {
+.rune-container svg#rune {
   display: block;
-  inline-size: auto;
-  block-size: auto;
-  max-inline-size: 100%;
-  max-block-size: 100%;
+  /* Change these four lines */
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+
+  /* Keep your other styles */
   overflow: visible;
   padding: 20px 50px 10px 50px;
   box-shadow: 0 0 10px 5px var(--color-shadow-subtle);
   background-color: var(--color-card-neutral);
 }
 
-.editor svg g {
+.rune-container svg#rune g {
   stroke-width: 6px;
   stroke-linecap: round;
   cursor: pointer;
 }
 
-.editor svg g.active {
+.rune-container svg#rune g line {
+  filter: drop-shadow(4px 6px 4px var(--color-shadow-active));
+}
+
+.rune-container svg#rune g.active {
   stroke: var(--color-outer-inner-active);
 }
 
-.editor svg g.active *:hover {
+.rune-container svg#rune g.active *:hover {
   stroke: color-mix(in srgb, var(--color-outer-inner-active), var(--tlt-c-white) 60%);
 }
 
-.editor svg g.inactive {
+.rune-container svg#rune g.inactive {
   stroke: var(--color-outer-inner-inactive);
 }
 
-.editor svg g.inactive *:hover {
+.rune-container svg#rune g.inactive *:hover {
+  stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
+}
+
+i {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 25px;
+  right: 15px;
+  padding: 2px 4px;
+}
+i svg {
+  stroke: var(--tlt-c-gray);
+  fill: transparent;
+  stroke-width: 3px;
+  filter: drop-shadow(3px 2px 1px var(--color-shadow-active));
+}
+
+i svg *:hover {
   stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
 }
 </style>
