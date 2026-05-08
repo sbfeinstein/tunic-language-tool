@@ -8,32 +8,31 @@ const props = defineProps({
   },
 })
 
-const baseId = useId()
-
 /**
  * All possible lines in a Rune shape, including outer and inner runes.
  */
-const possible_lines = [
-  { id: 1, key: baseId + '-E1', x1: '40', y1: '0', x2: '80', y2: '40' },
-  { id: 2, key: baseId + '-E2', x1: '80', y1: '40', x2: '80', y2: '120' },
-  { id: 3, key: baseId + '-E3', x1: '40', y1: '160', x2: '80', y2: '120' },
-  { id: 4, key: baseId + '-E4', x1: '0', y1: '120', x2: '40', y2: '160' },
-  { id: 5, key: baseId + '-E5', x1: '0', y1: '40', x2: '0', y2: '120' },
-  { id: 6, key: baseId + '-E6', x1: '0', y1: '40', x2: '40', y2: '0' },
-  { id: 7, key: baseId + '-E7', x1: '40', y1: '0', x2: '40', y2: '80' },
-  { id: 8, key: baseId + '-E8', x1: '40', y1: '80', x2: '80', y2: '40' },
-  { id: 9, key: baseId + '-E9', x1: '40', y1: '80', x2: '80', y2: '120' },
-  { id: 10, key: baseId + '-E10', x1: '40', y1: '80', x2: '40', y2: '160' },
-  { id: 11, key: baseId + '-E11', x1: '0', y1: '120', x2: '40', y2: '80' },
-  { id: 12, key: baseId + '-E12', x1: '0', y1: '40', x2: '40', y2: '80' },
+const baseId = useId()
+const LINES = [
+  { id: '1', key: baseId + '-E1', x1: '40', y1: '0', x2: '80', y2: '40' },
+  { id: '2', key: baseId + '-E2', x1: '80', y1: '40', x2: '80', y2: '120' },
+  { id: '3', key: baseId + '-E3', x1: '40', y1: '160', x2: '80', y2: '120' },
+  { id: '4', key: baseId + '-E4', x1: '0', y1: '120', x2: '40', y2: '160' },
+  { id: '5', key: baseId + '-E5', x1: '0', y1: '40', x2: '0', y2: '120' },
+  { id: '6', key: baseId + '-E6', x1: '0', y1: '40', x2: '40', y2: '0' },
+  { id: '7', key: baseId + '-E7', x1: '40', y1: '0', x2: '40', y2: '80' },
+  { id: '8', key: baseId + '-E8', x1: '40', y1: '80', x2: '80', y2: '40' },
+  { id: '9', key: baseId + '-E9', x1: '40', y1: '80', x2: '80', y2: '120' },
+  { id: '10', key: baseId + '-E10', x1: '40', y1: '80', x2: '40', y2: '160' },
+  { id: '11', key: baseId + '-E11', x1: '0', y1: '120', x2: '40', y2: '80' },
+  { id: '12', key: baseId + '-E12', x1: '0', y1: '40', x2: '40', y2: '80' },
 ]
 
-const rune_lines = computed(() => {
+const runeLines = computed(() => {
   return {
-    active: possible_lines.filter((line) => {
+    active: LINES.filter((line) => {
       return props.rune.edges.has(line.id)
     }),
-    inactive: possible_lines.filter((line) => {
+    inactive: LINES.filter((line) => {
       return !props.rune.edges.has(line.id)
     }),
   }
@@ -45,7 +44,7 @@ const rune_lines = computed(() => {
     <svg viewBox="0 0 85 165">
       <g class="inactive">
         <line
-          v-for="line in rune_lines.inactive"
+          v-for="line in runeLines.inactive"
           :x1="line.x1"
           :x2="line.x2"
           :y1="line.y1"
@@ -55,7 +54,7 @@ const rune_lines = computed(() => {
       </g>
       <g class="active">
         <line
-          v-for="line in rune_lines.active"
+          v-for="line in runeLines.active"
           :x1="line.x1"
           :x2="line.x2"
           :y1="line.y1"
