@@ -55,6 +55,9 @@
   --radius-sm: 5px;
   --radius-md: 15px;
   --transition-speed: 0.2s ease;
+
+  --filter-drop-shadow-above: drop-shadow(-1px -1px 1px var(--color-shadow-active))
+  drop-shadow(2px 2px 1px var(--color-shadow-subtle));
 }
 
 *,

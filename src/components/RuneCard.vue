@@ -126,7 +126,8 @@ const runeLines = computed(() => {
   left: 7px;
   color: var(--color-caption);
   padding: 2px 4px;
-  font-size: 11pt;
+  font-family: monospace;
+  font-size: 1em;
   border-radius: 4px;
 }
 

@@ -156,7 +156,7 @@ const matchingInnerRune = computed(() => {
 
 .editor {
   height: 100%;
-  min-height: 0; /* This is the "magic" line for grid/flex items */
+  min-height: 0; /* "magic" line for grid/flex items */
   display: flex;
   flex-direction: column;
 }
@@ -169,7 +169,6 @@ const matchingInnerRune = computed(() => {
   justify-content: center;
   padding: var(--spacing-lg) var(--spacing-sm) 4px;
 
-  /* Add these */
   flex: 1;
   min-height: 0;
   height: 100%;
@@ -187,8 +186,8 @@ const matchingInnerRune = computed(() => {
 
   /* Keep your other styles */
   overflow: visible;
-  padding: 20px 50px 10px 50px;
-  box-shadow: 0 0 10px 5px var(--color-shadow-subtle);
+  padding: 20px 50px 10px 0;
+  box-shadow: 0 0 10px 2px var(--color-shadow-subtle);
   background-color: var(--color-card-neutral);
 }
 
@@ -196,10 +195,7 @@ const matchingInnerRune = computed(() => {
   stroke-width: 8px;
   stroke-linecap: round;
   cursor: pointer;
-}
-
-.rune-container svg#rune g {
-  filter: drop-shadow(3px 2px 1px var(--color-shadow-active));
+  filter: var(--filter-drop-shadow-above);
 }
 
 .rune-container svg#rune g.active {
@@ -230,7 +226,7 @@ i svg {
   stroke: var(--tlt-c-gray);
   fill: transparent;
   stroke-width: 4px;
-  filter: drop-shadow(3px 2px 1px var(--color-shadow-active));
+  filter: var(--filter-drop-shadow-above);
 }
 
 i svg *:hover {

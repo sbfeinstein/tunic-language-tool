@@ -6,47 +6,47 @@ export const RUNE_INNER_EDGES = ['7', '8', '9', '10', '11', '12']
 export const RUNES = Object.freeze({
   outerRunes: [
     {
-      id: '1',
+      id: '01',
       type: 'outer',
       edges: new Set(['1', '5', '6']),
     },
     {
-      id: '2',
+      id: '02',
       type: 'outer',
       edges: new Set(['5', '6']),
     },
     {
-      id: '3',
+      id: '03',
       type: 'outer',
       edges: new Set(['3', '4']),
     },
     {
-      id: '4',
+      id: '04',
       type: 'outer',
       edges: new Set(['3', '4', '5']),
     },
     {
-      id: '5',
+      id: '05',
       type: 'outer',
       edges: new Set(['4', '5']),
     },
     {
-      id: '6',
+      id: '06',
       type: 'outer',
       edges: new Set(['1', '6']),
     },
     {
-      id: '7',
+      id: '07',
       type: 'outer',
       edges: new Set(['3', '4', '5', '6']),
     },
     {
-      id: '8',
+      id: '08',
       type: 'outer',
       edges: new Set(['1', '4', '5', '6']),
     },
     {
-      id: '9',
+      id: '09',
       type: 'outer',
       edges: new Set(['1', '4', '5']),
     },
@@ -98,47 +98,47 @@ export const RUNES = Object.freeze({
   ],
   innerRunes: [
     {
-      id: '1',
+      id: '01',
       type: 'inner',
       edges: new Set(['9', '11']),
     },
     {
-      id: '2',
+      id: '02',
       type: 'inner',
       edges: new Set(['9', '11', '12']),
     },
     {
-      id: '3',
+      id: '03',
       type: 'inner',
       edges: new Set(['7', '8', '9', '10', '11', '12']),
     },
     {
-      id: '4',
+      id: '04',
       type: 'inner',
       edges: new Set(['8', '10']),
     },
     {
-      id: '5',
+      id: '05',
       type: 'inner',
       edges: new Set(['7', '9']),
     },
     {
-      id: '6',
+      id: '06',
       type: 'inner',
       edges: new Set(['8', '10', '12']),
     },
     {
-      id: '7',
+      id: '07',
       type: 'inner',
       edges: new Set(['7', '9', '11']),
     },
     {
-      id: '8',
+      id: '08',
       type: 'inner',
       edges: new Set(['7', '8', '9']),
     },
     {
-      id: '9',
+      id: '09',
       type: 'inner',
       edges: new Set(['8', '9', '10']),
     },
