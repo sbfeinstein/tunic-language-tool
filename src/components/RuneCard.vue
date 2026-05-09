@@ -102,7 +102,7 @@ const runeLines = computed(() => {
 }
 
 .card svg g {
-  stroke-width: 6px;
+  stroke-width: 8px;
   stroke-linecap: round;
 }
 

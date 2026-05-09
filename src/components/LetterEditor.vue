@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, useId, watch } from 'vue'
+import { computed, reactive, ref, useId, watch } from 'vue'
 import { EDGES_TO_RUNE_MAPS, RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
 import runeUtils from '@/utils/runeUtils.js'
@@ -48,6 +48,7 @@ const clearLines = () => {
   for (const value of linesMap.values()) {
     value.active = false
   }
+  circleActive.value = false
 }
 
 /**
@@ -87,27 +88,36 @@ const runeLines = computed(() => {
   }
 })
 
-const matchingOuterRune = computed(() => {
-  const activeOuterEdges = new Set(
+const activeOuterEdges = computed(() => {
+  return new Set(
     runeLines.value.active.filter((line) => line.type === 'outer').map((line) => line.id),
   )
-  return EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeOuterEdges))
 })
+const noActiveOuterEdges = computed(() => activeOuterEdges.value.size === 0)
+const matchingOuterRune = computed(() =>
+  EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeOuterEdges.value)),
+)
 
-const matchingInnerRune = computed(() => {
-  const activeInnerEdges = new Set(
+const activeInnerEdges = computed(() => {
+  return new Set(
     runeLines.value.active.filter((line) => line.type === 'inner').map((line) => line.id),
   )
-  return EDGES_TO_RUNE_MAPS.innerEdges.get(runeUtils.keyForEdges(activeInnerEdges))
 })
+const noActiveInnerEdges = computed(() => activeInnerEdges.value.size === 0)
+const matchingInnerRune = computed(() =>
+  EDGES_TO_RUNE_MAPS.innerEdges.get(runeUtils.keyForEdges(activeInnerEdges.value)),
+)
+
+const circleActive = ref(false)
+const toggleCircle = () => (circleActive.value = !circleActive.value)
 </script>
 
 <template>
-  <div class="editor-grid">
+  <div class="outer-grid">
     <div class="editor">
       <div class="rune-container">
         <i><ClearIcon @click="clearLines()" /></i>
-        <svg id="rune" viewBox="0 0 85 165">
+        <svg id="rune" viewBox="0 0 85 180">
           <g class="inactive">
             <line
               v-for="line in runeLines.inactive"
@@ -118,6 +128,7 @@ const matchingInnerRune = computed(() => {
               :key="line.key"
               @click="toggleLine(line.id)"
             ></line>
+            <circle v-show="!circleActive" cx="40" cy="160" r="12" @click="toggleCircle()" />
           </g>
           <g class="active">
             <line
@@ -129,29 +140,36 @@ const matchingInnerRune = computed(() => {
               :key="line.key"
               @click="toggleLine(line.id)"
             ></line>
+            <circle v-show="circleActive" cx="40" cy="160" r="12" @click="toggleCircle()" />
           </g>
         </svg>
       </div>
     </div>
-    <div style="width: 150px">
-      {{ matchingOuterRune ? 'outer-' + matchingOuterRune.id : 'No Match' }}
-    </div>
-    <div style="width: 150px">
-      {{ matchingInnerRune ? 'inner-' + matchingInnerRune.id : 'No Match' }}
+    <div class="controls">
+      <div>
+        <span v-if="noActiveOuterEdges">Empty outer rune</span>
+        <span v-else-if="matchingOuterRune">{{ 'outer-' + matchingOuterRune.id }}</span>
+        <span v-else>Invalid outer rune</span>
+      </div>
+      <div>
+        <span v-if="noActiveInnerEdges">Empty inner rune</span>
+        <span v-else-if="matchingInnerRune">{{ 'inner-' + matchingInnerRune.id }}</span>
+        <span v-else>Invalid inner rune</span>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.editor-grid {
+.outer-grid {
   align-self: self-start;
   display: grid;
   gap: var(--spacing-sm);
-  grid-template-columns: minmax(280px, 2fr) 1fr 1fr;
-  height: 100%;
+  grid-template-columns: minmax(280px, 1fr) 1fr;
   justify-self: start;
   padding: var(--spacing-sm);
   width: 100%;
+  height: 100%;
 }
 
 .editor {
@@ -159,16 +177,16 @@ const matchingInnerRune = computed(() => {
   min-height: 0; /* "magic" line for grid/flex items */
   display: flex;
   flex-direction: column;
+  padding: var(--spacing-md) var(--spacing-sm) 4px;
+  box-shadow: 0 0 10px 2px var(--color-shadow-subtle);
+  background-color: var(--color-card-neutral);
+  margin-top: 5px;
 }
 
 .rune-container {
   position: relative;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-lg) var(--spacing-sm) 4px;
-
   flex: 1;
   min-height: 0;
   height: 100%;
@@ -177,18 +195,13 @@ const matchingInnerRune = computed(() => {
 
 .rune-container svg#rune {
   display: block;
-  /* Change these four lines */
   width: 100%;
   height: 100%;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-
-  /* Keep your other styles */
   overflow: visible;
-  padding: 20px 50px 10px 0;
-  box-shadow: 0 0 10px 2px var(--color-shadow-subtle);
-  background-color: var(--color-card-neutral);
+  padding: 1em;
 }
 
 .rune-container svg#rune g {
@@ -200,6 +213,7 @@ const matchingInnerRune = computed(() => {
 
 .rune-container svg#rune g.active {
   stroke: var(--color-outer-inner-active);
+  fill: var(--color-card-neutral);
 }
 
 .rune-container svg#rune g.active *:hover {
@@ -208,6 +222,7 @@ const matchingInnerRune = computed(() => {
 
 .rune-container svg#rune g.inactive {
   stroke: var(--color-outer-inner-inactive);
+  fill: transparent;
 }
 
 .rune-container svg#rune g.inactive *:hover {
@@ -218,19 +233,20 @@ i {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 25px;
-  right: 15px;
-  padding: 2px 4px;
-}
-i svg {
+  top: 0.5em;
+  right: 0.5em;
   stroke: var(--tlt-c-gray);
   fill: transparent;
   stroke-width: 4px;
   filter: var(--filter-drop-shadow-above);
 }
 
-i svg *:hover {
+i *:hover {
   stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
   cursor: pointer;
+}
+
+.controls {
+  padding: var(--spacing-md) var(--spacing-sm) 4px;
 }
 </style>
