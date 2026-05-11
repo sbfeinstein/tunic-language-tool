@@ -1,5 +1,6 @@
 <script setup>
 import { computed, useId } from 'vue'
+import RuneIDCaption from '@/components/RuneIDCaption.vue'
 
 const props = defineProps({
   rune: {
@@ -40,7 +41,8 @@ const runeLines = computed(() => {
 </script>
 
 <template>
-  <div :class="'card ' + props.rune.type">
+  <div :class="'card ' + rune.type">
+    <RuneIDCaption :rune="rune" class="caption" />
     <svg viewBox="0 0 85 165">
       <g class="inactive">
         <line
@@ -63,16 +65,14 @@ const runeLines = computed(() => {
         ></line>
       </g>
     </svg>
-    <div class="caption">{{ props.rune.id }}</div>
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Card - General Styling
    ========================================================================== */
 
 .card {
-  z-index: 1;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -91,8 +91,11 @@ const runeLines = computed(() => {
   overflow: hidden;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .card svg {
-  z-index: 3;
   display: block;
   inline-size: auto;
   block-size: auto;
@@ -116,27 +119,10 @@ const runeLines = computed(() => {
   transform: translateY(2px) translateX(-2px);
 }
 
-/* Card - Caption Styling
-   ========================================================================== */
-
 .caption {
-  z-index: 2;
   position: absolute;
   top: 7px;
   left: 7px;
-  color: var(--color-caption);
-  padding: 2px 4px;
-  font-family: monospace;
-  font-size: 1em;
-  border-radius: 4px;
-}
-
-.outer .caption {
-  background-color: var(--color-outer-rune-line-inactive);
-}
-
-.inner .caption {
-  background-color: var(--color-inner-rune-line-inactive);
 }
 
 /* Card - Outer Rune Styling

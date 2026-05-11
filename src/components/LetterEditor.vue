@@ -3,6 +3,7 @@ import { computed, reactive, ref, useId, watch } from 'vue'
 import { EDGES_TO_RUNE_MAPS, RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
 import runeUtils from '@/utils/runeUtils.js'
+import RuneIDCaption from '@/components/RuneIDCaption.vue'
 
 const props = defineProps({
   inputRune: {
@@ -93,7 +94,7 @@ const activeOuterEdges = computed(() => {
     runeLines.value.active.filter((line) => line.type === 'outer').map((line) => line.id),
   )
 })
-const noActiveOuterEdges = computed(() => activeOuterEdges.value.size === 0)
+const emptyOuter = computed(() => activeOuterEdges.value.size === 0)
 const matchingOuterRune = computed(() =>
   EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeOuterEdges.value)),
 )
@@ -103,10 +104,21 @@ const activeInnerEdges = computed(() => {
     runeLines.value.active.filter((line) => line.type === 'inner').map((line) => line.id),
   )
 })
-const noActiveInnerEdges = computed(() => activeInnerEdges.value.size === 0)
+const emptyInner = computed(() => activeInnerEdges.value.size === 0)
 const matchingInnerRune = computed(() =>
   EDGES_TO_RUNE_MAPS.innerEdges.get(runeUtils.keyForEdges(activeInnerEdges.value)),
 )
+
+const validationMessage = computed(() => {
+  if (!emptyOuter.value && !matchingOuterRune.value) {
+    return 'Outer rune is invalid'
+  } else if (!emptyInner.value && !matchingInnerRune.value) {
+    return 'Inner rune is invalid'
+  } else if (emptyOuter.value && emptyInner.value && circleActive.value) {
+    return 'Circle requires at least one valid rune choice'
+  }
+  return null
+})
 
 const circleActive = ref(false)
 const toggleCircle = () => (circleActive.value = !circleActive.value)
@@ -147,15 +159,16 @@ const toggleCircle = () => (circleActive.value = !circleActive.value)
     </div>
     <div class="controls">
       <div>
-        <span v-if="noActiveOuterEdges">Empty outer rune</span>
-        <span v-else-if="matchingOuterRune">{{ 'outer-' + matchingOuterRune.id }}</span>
-        <span v-else>Invalid outer rune</span>
+        <RuneIDCaption v-if="emptyOuter" force-text="Empty" force-type="outer" />
+        <RuneIDCaption v-else-if="matchingOuterRune" :rune="matchingOuterRune" />
+        <RuneIDCaption v-else force-text="Invalid" force-type="outer" />
       </div>
       <div>
-        <span v-if="noActiveInnerEdges">Empty inner rune</span>
-        <span v-else-if="matchingInnerRune">{{ 'inner-' + matchingInnerRune.id }}</span>
-        <span v-else>Invalid inner rune</span>
+        <RuneIDCaption v-if="emptyInner" force-text="Empty" force-type="inner" />
+        <RuneIDCaption v-else-if="matchingInnerRune" :rune="matchingInnerRune" />
+        <RuneIDCaption v-else force-text="Invalid" force-type="inner" />
       </div>
+      <div v-show="validationMessage">{{ validationMessage }}</div>
     </div>
   </div>
 </template>
@@ -248,5 +261,11 @@ i *:hover {
 
 .controls {
   padding: var(--spacing-md) var(--spacing-sm) 4px;
+  width: auto;
+}
+
+.controls .caption {
+  min-width: 5em;
+  min-height: 5em;
 }
 </style>
