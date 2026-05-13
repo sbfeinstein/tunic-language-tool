@@ -1,9 +1,8 @@
 <script setup>
-import { computed, reactive, ref, useId, watch } from 'vue'
-import { EDGES_TO_RUNE_MAPS, RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
+import { computed, reactive, ref, useId, watch, watchEffect } from 'vue'
+import { RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
-import runeUtils from '@/utils/runeUtils.js'
-import RuneIDCaption from '@/components/RuneIDCaption.vue'
+import SelectedRuneStatus from '@/components/SelectedRuneStatus.vue'
 
 const props = defineProps({
   inputRune: {
@@ -89,43 +88,42 @@ const runeLines = computed(() => {
   }
 })
 
-const activeOuterEdges = computed(() => {
-  return new Set(
-    runeLines.value.active.filter((line) => line.type === 'outer').map((line) => line.id),
-  )
-})
-const emptyOuter = computed(() => activeOuterEdges.value.size === 0)
-const matchingOuterRune = computed(() =>
-  EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeOuterEdges.value)),
-)
+const outerStatus = ref({})
+const handleOuterStatus = (status) => {
+  outerStatus.value = status
+}
 
-const activeInnerEdges = computed(() => {
-  return new Set(
-    runeLines.value.active.filter((line) => line.type === 'inner').map((line) => line.id),
-  )
-})
-const emptyInner = computed(() => activeInnerEdges.value.size === 0)
-const matchingInnerRune = computed(() =>
-  EDGES_TO_RUNE_MAPS.innerEdges.get(runeUtils.keyForEdges(activeInnerEdges.value)),
-)
+const innerStatus = ref({})
+const handleInnerStatus = (status) => {
+  innerStatus.value = status
+}
 
 const validationMessage = computed(() => {
-  if (!emptyOuter.value && !matchingOuterRune.value) {
-    return 'Outer rune is invalid'
-  } else if (!emptyInner.value && !matchingInnerRune.value) {
-    return 'Inner rune is invalid'
-  } else if (emptyOuter.value && emptyInner.value && circleActive.value) {
+  const outerValue = outerStatus.value
+  const innerValue = innerStatus.value
+
+  if (outerValue.validationMessage) {
+    return outerValue.validationMessage
+  }
+
+  if (innerValue.validationMessage) {
+    return innerValue.validationMessage
+  }
+
+  if (outerValue.emptyEdges && innerValue.emptyEdges && circleActive.value) {
     return 'Circle requires at least one valid rune choice'
   }
+
   return null
 })
 
 const circleActive = ref(false)
 const toggleCircle = () => (circleActive.value = !circleActive.value)
+const outerStatusFirst = computed(() => circleActive.value)
 </script>
 
 <template>
-  <div class="outer-grid">
+  <div class="outer-panel">
     <div class="editor">
       <div class="rune-container">
         <i><ClearIcon @click="clearLines()" /></i>
@@ -158,27 +156,48 @@ const toggleCircle = () => (circleActive.value = !circleActive.value)
       </div>
     </div>
     <div class="controls">
-      <div>
-        <RuneIDCaption v-if="emptyOuter" force-text="Empty" force-type="outer" />
-        <RuneIDCaption v-else-if="matchingOuterRune" :rune="matchingOuterRune" />
-        <RuneIDCaption v-else force-text="Invalid" force-type="outer" />
+      <div class="rune-analysis">
+        <div>
+          <SelectedRuneStatus
+            v-if="outerStatusFirst"
+            :lines-map="linesMap"
+            rune-type="outer"
+            @status-updated="handleOuterStatus"
+          />
+          <SelectedRuneStatus
+            v-else
+            :lines-map="linesMap"
+            rune-type="inner"
+            @status-updated="handleInnerStatus"
+          />
+        </div>
+        <span class="operator">+</span>
+        <div>
+          <SelectedRuneStatus
+            v-if="outerStatusFirst"
+            :lines-map="linesMap"
+            rune-type="inner"
+            @status-updated="handleInnerStatus"
+          />
+          <SelectedRuneStatus
+            v-else
+            :lines-map="linesMap"
+            rune-type="outer"
+            @status-updated="handleOuterStatus"
+          />
+        </div>
       </div>
-      <div>
-        <RuneIDCaption v-if="emptyInner" force-text="Empty" force-type="inner" />
-        <RuneIDCaption v-else-if="matchingInnerRune" :rune="matchingInnerRune" />
-        <RuneIDCaption v-else force-text="Invalid" force-type="inner" />
-      </div>
-      <div v-show="validationMessage">{{ validationMessage }}</div>
+      <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.outer-grid {
+.outer-panel {
   align-self: self-start;
-  display: grid;
+  display: flex;
+  flex-direction: row;
   gap: var(--spacing-sm);
-  grid-template-columns: minmax(280px, 1fr) 1fr;
   justify-self: start;
   padding: var(--spacing-sm);
   width: 100%;
@@ -186,14 +205,12 @@ const toggleCircle = () => (circleActive.value = !circleActive.value)
 }
 
 .editor {
-  height: 100%;
-  min-height: 0; /* "magic" line for grid/flex items */
-  display: flex;
-  flex-direction: column;
+  min-width: 300px;
   padding: var(--spacing-md) var(--spacing-sm) 4px;
   box-shadow: 0 0 10px 2px var(--color-shadow-subtle);
   background-color: var(--color-card-neutral);
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .rune-container {
@@ -261,11 +278,29 @@ i *:hover {
 
 .controls {
   padding: var(--spacing-md) var(--spacing-sm) 4px;
-  width: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.controls .caption {
-  min-width: 5em;
-  min-height: 5em;
+.controls .rune-analysis {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.controls .rune-analysis .operator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.controls .validation {
+  padding-top: 1em;
+  color: var(--color-caption);
 }
 </style>
