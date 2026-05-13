@@ -1,0 +1,258 @@
+{
+  "outerRunes": [
+    {
+      "id": "01",
+      "type": "outer",
+      "translation": "a",
+      "emphasized": false
+    },
+    {
+      "id": "02",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "03",
+      "type": "outer",
+      "translation": null,
+      "emphasized": true
+    },
+    {
+      "id": "04",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "05",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "06",
+      "type": "outer",
+      "translation": "u",
+      "emphasized": false
+    },
+    {
+      "id": "07",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "08",
+      "type": "outer",
+      "translation": "t\noo",
+      "emphasized": false
+    },
+    {
+      "id": "09",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "10",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "11",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "12",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "13",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "14",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "15",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "16",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "17",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "18",
+      "type": "outer",
+      "translation": null,
+      "emphasized": false
+    }
+  ],
+  "innerRunes": [
+    {
+      "id": "01",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "02",
+      "type": "inner",
+      "translation": "n",
+      "emphasized": false
+    },
+    {
+      "id": "03",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "04",
+      "type": "inner",
+      "translation": "p",
+      "emphasized": false
+    },
+    {
+      "id": "05",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "06",
+      "type": "inner",
+      "translation": "t\noo",
+      "emphasized": false
+    },
+    {
+      "id": "07",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "08",
+      "type": "inner",
+      "translation": "c\nk",
+      "emphasized": false
+    },
+    {
+      "id": "09",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "10",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "11",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "12",
+      "type": "inner",
+      "translation": "f\nO",
+      "emphasized": false
+    },
+    {
+      "id": "13",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "14",
+      "type": "inner",
+      "translation": "th",
+      "emphasized": false
+    },
+    {
+      "id": "15",
+      "type": "inner",
+      "translation": "TH",
+      "emphasized": true
+    },
+    {
+      "id": "16",
+      "type": "inner",
+      "translation": "S",
+      "emphasized": false
+    },
+    {
+      "id": "17",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "18",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "19",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "20",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "21",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "22",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    },
+    {
+      "id": "23",
+      "type": "inner",
+      "translation": "W",
+      "emphasized": false
+    },
+    {
+      "id": "24",
+      "type": "inner",
+      "translation": null,
+      "emphasized": false
+    }
+  ]
+}

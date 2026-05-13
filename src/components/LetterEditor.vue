@@ -95,7 +95,7 @@ const validationMessage = computed(() => {
   const innerStatus = innerStatusRef.value
 
   if (!outerStatus || !innerStatus) {
-    return
+    return 'Unexpected error'
   }
 
   if (outerStatus.state === 'invalid' && innerStatus.state === 'invalid') {

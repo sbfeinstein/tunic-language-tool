@@ -1,6 +1,7 @@
 <script setup>
 import { computed, useId } from 'vue'
 import RuneIDCaption from '@/components/RuneIDCaption.vue'
+import { useRuneDataStore } from '@/stores/runeData.js'
 
 const props = defineProps({
   rune: {
@@ -8,6 +9,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const store = useRuneDataStore()
 
 /**
  * All possible lines in a Rune shape, including outer and inner runes.
@@ -38,6 +41,33 @@ const runeLines = computed(() => {
     }),
   }
 })
+
+const runeData = computed(() => {
+  if (props.rune.type === 'outer') {
+    return store.outer[props.rune.id]
+  }
+
+  if (props.rune.type === 'inner') {
+    return store.inner[props.rune.id]
+  }
+
+  return null
+})
+
+const translation = computed(() => {
+  return runeData.value.translation || '??'
+})
+
+const translationClass = computed(() => {
+  let cls = 'translation'
+  if (runeData.value.translation) {
+    cls += ' known-translation'
+  }
+  if (runeData.value.emphasized) {
+    cls += ' emphasized'
+  }
+  return cls
+})
 </script>
 
 <template>
@@ -65,6 +95,7 @@ const runeLines = computed(() => {
         ></line>
       </g>
     </svg>
+    <span :class="translationClass">{{ translation }}</span>
   </div>
 </template>
 
@@ -99,9 +130,10 @@ const runeLines = computed(() => {
   display: block;
   inline-size: auto;
   block-size: auto;
-  max-inline-size: 100%;
+  width: 100%;
   max-block-size: 100%;
   overflow: visible;
+  padding-left: 1.5em;
 }
 
 .card svg g {
@@ -123,6 +155,23 @@ const runeLines = computed(() => {
   position: absolute;
   top: 7px;
   left: 7px;
+}
+
+.translation {
+  padding-right: 1em;
+  color: var(--tlt-c-gray);
+}
+
+.translation.emphasized {
+  font-weight: bold;
+}
+
+.card.inner .known-translation {
+  color: var(--color-inner-rune-line-active);
+}
+
+.card.outer .known-translation {
+  color: var(--color-outer-rune-line-active);
 }
 
 /* Card - Outer Rune Styling
