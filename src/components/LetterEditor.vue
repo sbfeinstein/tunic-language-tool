@@ -110,8 +110,16 @@ const validationMessage = computed(() => {
     return 'Inner rune must be valid or empty'
   }
 
-  if (circleActive.value && (outerStatus.state === 'empty' || innerStatus.state === 'empty')) {
+  if (circleActive.value && outerStatus.state === 'empty' && innerStatus.state === 'empty') {
     return 'Circle requires valid, non-empty inner and outer runes'
+  }
+
+  if (circleActive.value && outerStatus.state === 'empty') {
+    return 'Circle requires a valid, non-empty outer rune'
+  }
+
+  if (circleActive.value && innerStatus.state === 'empty') {
+    return 'Circle requires a valid, non-empty inner rune'
   }
 
   return null
