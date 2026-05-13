@@ -24,8 +24,8 @@ const activeEdges = computed(() => {
 
   return new Set(active.filter((line) => line.type === props.runeType).map((line) => line.id))
 })
-const emptyEdges = computed(() => activeEdges.value.size === 0)
-const matchingRune = computed(() => {
+const isEmpty = computed(() => activeEdges.value.size === 0)
+const match = computed(() => {
   if (props.runeType === 'outer') {
     return EDGES_TO_RUNE_MAPS.outerEdges.get(runeUtils.keyForEdges(activeEdges.value))
   } else if (props.runeType === 'inner') {
@@ -34,27 +34,29 @@ const matchingRune = computed(() => {
   return null
 })
 
-const validationMessage = computed(() => {
-  if (emptyEdges.value || matchingRune.value) {
-    return null
+const state = computed(() => {
+  if (isEmpty.value) {
+    return 'empty'
   }
 
-  return `${props.runeType} rune must be valid or empty`
+  if (match.value) {
+    return 'match'
+  }
+
+  return `invalid`
 })
 
 watchEffect(() => {
   emit('statusUpdated', {
-    activeEdges,
-    emptyEdges,
-    matchingRune,
-    validationMessage,
+    state,
+    match,
   })
 })
 </script>
 
 <template>
-  <RuneIDCaption v-if="emptyEdges" force-text="Empty" :force-type="runeType" />
-  <RuneIDCaption v-else-if="matchingRune" :rune="matchingRune" />
+  <RuneIDCaption v-if="isEmpty" force-text="Empty" :force-type="runeType" />
+  <RuneIDCaption v-else-if="match" :rune="match" />
   <RuneIDCaption v-else force-text="Invalid" :force-type="runeType" />
 </template>
 

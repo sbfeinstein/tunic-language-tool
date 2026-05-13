@@ -88,30 +88,30 @@ const runeLines = computed(() => {
   }
 })
 
-const outerStatus = ref({})
-const handleOuterStatus = (status) => {
-  outerStatus.value = status
-}
-
-const innerStatus = ref({})
-const handleInnerStatus = (status) => {
-  innerStatus.value = status
-}
-
+const outerStatusRef = ref()
+const innerStatusRef = ref()
 const validationMessage = computed(() => {
-  const outerValue = outerStatus.value
-  const innerValue = innerStatus.value
+  const outerStatus = outerStatusRef.value
+  const innerStatus = innerStatusRef.value
 
-  if (outerValue.validationMessage) {
-    return outerValue.validationMessage
+  if (!outerStatus || !innerStatus) {
+    return
   }
 
-  if (innerValue.validationMessage) {
-    return innerValue.validationMessage
+  if (outerStatus.state === 'invalid' && innerStatus.state === 'invalid') {
+    return 'Inner and outer runes must be valid or empty'
   }
 
-  if (outerValue.emptyEdges && innerValue.emptyEdges && circleActive.value) {
-    return 'Circle requires at least one valid rune choice'
+  if (outerStatus.state === 'invalid') {
+    return 'Outer rune must be valid or empty'
+  }
+
+  if (innerStatus.state === 'invalid') {
+    return 'Inner rune must be valid or empty'
+  }
+
+  if (circleActive.value && (outerStatus.state === 'empty' || innerStatus.state === 'empty')) {
+    return 'Circle requires valid, non-empty inner and outer runes'
   }
 
   return null
@@ -162,13 +162,13 @@ const outerStatusFirst = computed(() => circleActive.value)
             v-if="outerStatusFirst"
             :lines-map="linesMap"
             rune-type="outer"
-            @status-updated="handleOuterStatus"
+            @status-updated="(status) => (outerStatusRef = status)"
           />
           <SelectedRuneStatus
             v-else
             :lines-map="linesMap"
             rune-type="inner"
-            @status-updated="handleInnerStatus"
+            @status-updated="(status) => (innerStatusRef = status)"
           />
         </div>
         <span class="operator">+</span>
@@ -177,13 +177,13 @@ const outerStatusFirst = computed(() => circleActive.value)
             v-if="outerStatusFirst"
             :lines-map="linesMap"
             rune-type="inner"
-            @status-updated="handleInnerStatus"
+            @status-updated="(status) => (innerStatusRef = status)"
           />
           <SelectedRuneStatus
             v-else
             :lines-map="linesMap"
             rune-type="outer"
-            @status-updated="handleOuterStatus"
+            @status-updated="(status) => (outerStatusRef = status)"
           />
         </div>
       </div>
@@ -227,8 +227,6 @@ const outerStatusFirst = computed(() => circleActive.value)
   display: block;
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
   overflow: visible;
   padding: 1em;
@@ -263,8 +261,8 @@ i {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 0.5em;
-  right: 0.5em;
+  top: 5px;
+  right: 5px;
   stroke: var(--tlt-c-gray);
   fill: transparent;
   stroke-width: 4px;
