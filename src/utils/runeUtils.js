@@ -1,17 +1,19 @@
 /**
- * Creates a stable key of type string from the given Set of rune edge IDs.
+ * Creates a stable key of type string from the given rune line IDs.
  * Note that there is no guarantee the particular format (i.e. the default sort implementation
  * against an array of integers converts to string and then sorts alphabetically).
  *
  * E.g.
  *
- * keyForEdges([1,4,3]) = "1-3-4"
+ * runeKeyFor(['1', '4', '3']) = "1-3-4"
+ * runeKeyFor(['1', '4', '3', '4']) = "1-3-4"
  *
- * @param edges {Set} the Set of edge IDs (nunbers) to convert to a key
- * @returns {string} the key representation of the given edges
+ * @param lineIDs {array<string>} the line IDs to convert to a key
+ * @returns {string} the key representation of the given line IDs
  */
-function keyForEdges(edges) {
-  return Array.from(edges).sort().join('-')
+function runeKeyFor(lineIDs) {
+  return [...new Set(lineIDs)].sort().join('-')
 }
 
-export default { keyForEdges }
+export default { runeKeyFor }
+

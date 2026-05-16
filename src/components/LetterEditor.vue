@@ -1,8 +1,10 @@
 <script setup>
-import { computed, reactive, ref, useId, watch, watchEffect } from 'vue'
-import { RUNE_INNER_EDGES, RUNE_OUTER_EDGES } from '@/constants/runes.js'
+import { computed, watch } from 'vue'
+import { INNER_LINE_IDS, OUTER_LINE_IDS } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
-import SelectedRuneStatus from '@/components/SelectedRuneStatus.vue'
+import { useEditorStore } from '@/stores/editorStore.js'
+import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
+import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
 
 const props = defineProps({
   inputRune: {
@@ -12,122 +14,86 @@ const props = defineProps({
   },
 })
 
+const editorStore = useEditorStore()
+
+const toggleCircle = () => (editorStore.dataRef.circle.active = !editorStore.dataRef.circle.active)
+
+/**
+ * Sets the rune lines with the given IDs to active and other outer rune lines to inactive, from
+ * the lineIDsForType (which is intended to be OUTER_LINE_IDS or INNER_LINE_IDS)
+ */
+const activateLines = (allLineIDs, linesState, inputLineIDs) => {
+  for (const id of allLineIDs) {
+    linesState[id].active = false
+  }
+  for (const id of inputLineIDs) {
+    linesState[id].active = true
+  }
+}
+
+const toggleLine = (lineID) => {
+  if (OUTER_LINE_IDS.includes(lineID)) {
+    editorStore.dataRef.lines.outer[lineID].active = !editorStore.dataRef.lines.outer[lineID].active
+  }
+  if (INNER_LINE_IDS.includes(lineID)) {
+    editorStore.dataRef.lines.inner[lineID].active = !editorStore.dataRef.lines.inner[lineID].active
+  }
+}
+
+const clearLines = () => {
+  Object.keys(editorStore.dataRef.lines.outer).forEach(
+    (id) => (editorStore.dataRef.lines.outer[id].active = false),
+  )
+  Object.keys(editorStore.dataRef.lines.inner).forEach(
+    (id) => (editorStore.dataRef.lines.inner[id].active = false),
+  )
+  editorStore.dataRef.circle.active = false
+}
+
 watch(
   () => props.inputRune,
-  (newInputRune) => {
-    if (props.inputRune.type === 'outer') {
-      activateLines(RUNE_OUTER_EDGES, false)
-    } else {
-      activateLines(RUNE_INNER_EDGES, false)
+  (inputRune) => {
+    switch (props.inputRune.type) {
+      case 'outer':
+        activateLines(OUTER_LINE_IDS, editorStore.dataRef.lines.outer, inputRune.lines)
+        break
+      case 'inner':
+        activateLines(INNER_LINE_IDS, editorStore.dataRef.lines.inner, inputRune.lines)
+        break
     }
-
-    activateLines(Array.from(newInputRune.edges), true)
   },
   {
     deep: true,
   },
 )
 
-const activateLines = (lineIDs, active) => {
-  for (const lineID of lineIDs) {
-    const existingLine = linesMap.get(lineID)
-    if (existingLine) {
-      existingLine.active = active
-    }
-  }
-}
-
-const toggleLine = (lineID) => {
-  const existingLine = linesMap.get(lineID)
-  if (existingLine) {
-    existingLine.active = !existingLine.active
-  }
-}
-
-const clearLines = () => {
-  for (const value of linesMap.values()) {
-    value.active = false
-  }
-  circleActive.value = false
-}
-
-/**
- * All possible lines in a Rune shape, including outer and inner runes.
- */
-const LINES = [
-  { id: '1', x1: '40', y1: '0', x2: '80', y2: '40', type: 'outer' },
-  { id: '2', x1: '80', y1: '40', x2: '80', y2: '120', type: 'outer' },
-  { id: '3', x1: '40', y1: '160', x2: '80', y2: '120', type: 'outer' },
-  { id: '4', x1: '0', y1: '120', x2: '40', y2: '160', type: 'outer' },
-  { id: '5', x1: '0', y1: '40', x2: '0', y2: '120', type: 'outer' },
-  { id: '6', x1: '0', y1: '40', x2: '40', y2: '0', type: 'outer' },
-  { id: '7', x1: '40', y1: '0', x2: '40', y2: '80', type: 'inner' },
-  { id: '8', x1: '40', y1: '80', x2: '80', y2: '40', type: 'inner' },
-  { id: '9', x1: '40', y1: '80', x2: '80', y2: '120', type: 'inner' },
-  { id: '10', x1: '40', y1: '80', x2: '40', y2: '160', type: 'inner' },
-  { id: '11', x1: '0', y1: '120', x2: '40', y2: '80', type: 'inner' },
-  { id: '12', x1: '0', y1: '40', x2: '40', y2: '80', type: 'inner' },
-]
-
-const baseId = useId()
-const linesMap = reactive(
-  new Map(LINES.map((line) => [line.id, { ...line, key: baseId + '-' + line.id, active: false }])),
-)
-
-const runeLines = computed(() => {
-  const active = [...linesMap.values()].filter((line) => {
-    return line.active
-  })
-  const inactive = [...linesMap.values()].filter((line) => {
-    return !line.active
-  })
-
-  return {
-    active: active,
-    inactive: inactive,
-  }
-})
-
-const outerStatusRef = ref()
-const innerStatusRef = ref()
 const validationMessage = computed(() => {
-  const outerStatus = outerStatusRef.value
-  const innerStatus = innerStatusRef.value
-
-  if (!outerStatus || !innerStatus) {
-    return 'Unexpected error'
-  }
-
-  if (outerStatus.state === 'invalid' && innerStatus.state === 'invalid') {
+  if (editorStore.outerRuneInvalid && editorStore.innerRuneInvalid) {
     return 'Inner and outer runes must be valid or empty'
   }
 
-  if (outerStatus.state === 'invalid') {
+  if (editorStore.outerRuneInvalid) {
     return 'Outer rune must be valid or empty'
   }
 
-  if (innerStatus.state === 'invalid') {
+  if (editorStore.innerRuneInvalid) {
     return 'Inner rune must be valid or empty'
   }
 
-  if (circleActive.value && outerStatus.state === 'empty' && innerStatus.state === 'empty') {
+  if (editorStore.circleActive && editorStore.outerRuneEmpty && editorStore.innerRuneEmpty) {
     return 'Circle requires valid, non-empty inner and outer runes'
   }
 
-  if (circleActive.value && outerStatus.state === 'empty') {
+  if (editorStore.circleActive && editorStore.outerRuneEmpty) {
     return 'Circle requires a valid, non-empty outer rune'
   }
 
-  if (circleActive.value && innerStatus.state === 'empty') {
+  if (editorStore.circleActive && editorStore.innerRuneEmpty) {
     return 'Circle requires a valid, non-empty inner rune'
   }
 
   return null
 })
-
-const circleActive = ref(false)
-const toggleCircle = () => (circleActive.value = !circleActive.value)
-const outerStatusFirst = computed(() => circleActive.value)
 </script>
 
 <template>
@@ -138,7 +104,7 @@ const outerStatusFirst = computed(() => circleActive.value)
         <svg id="rune" viewBox="0 0 85 180">
           <g class="inactive">
             <line
-              v-for="line in runeLines.inactive"
+              v-for="line in editorStore.inactiveLines"
               :x1="line.x1"
               :x2="line.x2"
               :y1="line.y1"
@@ -146,11 +112,17 @@ const outerStatusFirst = computed(() => circleActive.value)
               :key="line.key"
               @click="toggleLine(line.id)"
             ></line>
-            <circle v-show="!circleActive" cx="40" cy="160" r="12" @click="toggleCircle()" />
+            <circle
+              v-show="!editorStore.circleActive"
+              cx="40"
+              cy="160"
+              r="12"
+              @click="toggleCircle()"
+            />
           </g>
           <g class="active">
             <line
-              v-for="line in runeLines.active"
+              v-for="line in editorStore.activeLines"
               :x1="line.x1"
               :x2="line.x2"
               :y1="line.y1"
@@ -158,41 +130,26 @@ const outerStatusFirst = computed(() => circleActive.value)
               :key="line.key"
               @click="toggleLine(line.id)"
             ></line>
-            <circle v-show="circleActive" cx="40" cy="160" r="12" @click="toggleCircle()" />
+            <circle
+              v-show="editorStore.circleActive"
+              cx="40"
+              cy="160"
+              r="12"
+              @click="toggleCircle()"
+            />
           </g>
         </svg>
       </div>
     </div>
     <div class="controls">
       <div class="rune-analysis">
-        <div>
-          <SelectedRuneStatus
-            v-if="outerStatusFirst"
-            :lines-map="linesMap"
-            rune-type="outer"
-            @status-updated="(status) => (outerStatusRef = status)"
-          />
-          <SelectedRuneStatus
-            v-else
-            :lines-map="linesMap"
-            rune-type="inner"
-            @status-updated="(status) => (innerStatusRef = status)"
-          />
-        </div>
+        <EditorSelectionStatusCard position="first" />
         <span class="operator">+</span>
-        <div>
-          <SelectedRuneStatus
-            v-if="outerStatusFirst"
-            :lines-map="linesMap"
-            rune-type="inner"
-            @status-updated="(status) => (innerStatusRef = status)"
-          />
-          <SelectedRuneStatus
-            v-else
-            :lines-map="linesMap"
-            rune-type="outer"
-            @status-updated="(status) => (outerStatusRef = status)"
-          />
+        <EditorSelectionStatusCard position="second" />
+        <span class="operator">=</span>
+        <div class="translation">
+          <EditorSelectionTranslationText position="first" />
+          <EditorSelectionTranslationText position="second" />
         </div>
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
@@ -308,5 +265,13 @@ i *:hover {
 .controls .validation {
   padding-top: 1em;
   color: var(--color-caption);
+}
+
+.controls .translation {
+  display: inline-flex;
+  color: var(--color-outer-inner-active);
+  align-items: center;
+  text-align: center;
+  font-size: 250%;
 }
 </style>

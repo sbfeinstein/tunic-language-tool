@@ -17,14 +17,14 @@ const baseId = useId()
     <span class="header-row outer-runes-header">Outer Runes</span>
     <RuneCard
       v-for="rune in RUNES.outerRunes"
-      :key="baseId + '-O-' + rune.id"
+      :key="`${baseId}-outer-${rune.id}`"
       :rune="rune"
       @click="handleClick(rune)"
     />
     <span class="header-row inner-runes-header">Inner Runes</span>
     <RuneCard
       v-for="rune in RUNES.innerRunes"
-      :key="baseId + '-I-' + rune.id"
+      :key="`${baseId}-outer-${rune.id}`"
       :rune="rune"
       @click="handleClick(rune)"
     />

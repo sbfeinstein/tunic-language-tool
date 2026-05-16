@@ -1,7 +1,8 @@
 <script setup>
 import { computed, useId } from 'vue'
 import RuneIDCaption from '@/components/RuneIDCaption.vue'
-import { useRuneDataStore } from '@/stores/runeData.js'
+import { useRuneTranslationStore } from '@/stores/runeTranslationStore.js'
+import { useEditorStore } from '@/stores/editorStore.js'
 
 const props = defineProps({
   rune: {
@@ -10,7 +11,8 @@ const props = defineProps({
   },
 })
 
-const store = useRuneDataStore()
+const translationStore = useRuneTranslationStore()
+const editorStore = useEditorStore()
 
 /**
  * All possible lines in a Rune shape, including outer and inner runes.
@@ -33,37 +35,45 @@ const LINES = [
 
 const runeLines = computed(() => {
   return {
-    active: LINES.filter((line) => {
-      return props.rune.edges.has(line.id)
-    }),
-    inactive: LINES.filter((line) => {
-      return !props.rune.edges.has(line.id)
-    }),
+    active: LINES.filter((line) => props.rune.lines.includes(line.id)),
+    inactive: LINES.filter((line) => !props.rune.lines.includes(line.id)),
   }
 })
 
-const runeData = computed(() => {
+const matchesEditorClass = computed(() => {
+  if (props.rune.type === 'outer' && editorStore.outerRuneMatch?.id === props.rune.id) {
+    return 'editor-match'
+  }
+
+  if (props.rune.type === 'inner' && editorStore.innerRuneMatch?.id === props.rune.id) {
+    return 'editor-match'
+  }
+
+  return ''
+})
+
+const translationData = computed(() => {
   if (props.rune.type === 'outer') {
-    return store.outer[props.rune.id]
+    return translationStore.outer[props.rune.id]
   }
 
   if (props.rune.type === 'inner') {
-    return store.inner[props.rune.id]
+    return translationStore.inner[props.rune.id]
   }
 
   return null
 })
 
-const translation = computed(() => {
-  return runeData.value.translation || '??'
+const translationText = computed(() => {
+  return translationData.value.translation.join('\n') || '??'
 })
 
 const translationClass = computed(() => {
   let cls = 'translation'
-  if (runeData.value.translation) {
+  if (translationText.value !== '??') {
     cls += ' known-translation'
   }
-  if (runeData.value.emphasized) {
+  if (translationData.value.emphasized) {
     cls += ' emphasized'
   }
   return cls
@@ -71,7 +81,7 @@ const translationClass = computed(() => {
 </script>
 
 <template>
-  <div :class="'card ' + rune.type">
+  <div :class="`card ${rune.type} ${matchesEditorClass}`">
     <RuneIDCaption :rune="rune" class="caption" />
     <svg viewBox="0 0 85 165">
       <g class="inactive">
@@ -95,7 +105,7 @@ const translationClass = computed(() => {
         ></line>
       </g>
     </svg>
-    <span :class="translationClass">{{ translation }}</span>
+    <span :class="translationClass">{{ translationText }}</span>
   </div>
 </template>
 
@@ -181,6 +191,10 @@ const translationClass = computed(() => {
   background-color: var(--color-outer-runes-inactive);
 }
 
+.card.outer.editor-match {
+  background-color: var(--color-outer-runes-active);
+}
+
 .card.outer svg g.active {
   stroke: var(--color-outer-rune-line-active);
 }
@@ -202,6 +216,10 @@ const translationClass = computed(() => {
 
 .card.inner {
   background-color: var(--color-inner-runes-inactive);
+}
+
+.card.inner.editor-match {
+  background-color: var(--color-inner-runes-active);
 }
 
 .card.inner svg g.active {
