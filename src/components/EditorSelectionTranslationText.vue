@@ -13,26 +13,29 @@ const props = defineProps({
 const editorStore = useEditorStore()
 const translationStore = useRuneTranslationStore()
 
-const cardState = computed(() => {
+const translationData = computed(() => {
   if (
     (props.position === 'first' && !editorStore.circleActive) ||
     (props.position === 'second' && editorStore.circleActive)
   ) {
-    return {
-      cssClass: '',
-      text:
-        translationStore.inner[editorStore.innerRuneMatch?.id]?.translation.join('<br>') || '??',
-    }
+    return translationStore.inner[editorStore.innerRuneMatch?.id]?.translation
   }
-  return {
-    cssClass: '',
-    text: translationStore.outer[editorStore.outerRuneMatch?.id]?.translation.join('<br>') || '??',
-  }
+  return translationStore.outer[editorStore.outerRuneMatch?.id]?.translation
 })
+
+const translationText = computed(() =>
+  translationData.value ? translationData.value?.join('<br>') || '??' : '',
+)
+
+const translationCSSClass = computed(() => (translationData.value?.length > 0 ? '' : '-unknown'))
 </script>
 
 <template>
-  <span v-html="cardState.text" />
+  <span v-html="translationText" :class="translationCSSClass" />
 </template>
 
-<style scoped></style>
+<style scoped>
+.-unknown {
+  color: var(--tlt-c-gray);
+}
+</style>

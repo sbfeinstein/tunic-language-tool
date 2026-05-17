@@ -61,7 +61,7 @@ export const RUNE_SVG_DATA = Object.freeze({
   circle: {
     cx: '40',
     cy: '160',
-    r: '12',
+    r: '13',
   },
 })
 

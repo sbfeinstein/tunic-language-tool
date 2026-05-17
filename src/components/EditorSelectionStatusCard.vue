@@ -7,6 +7,9 @@ const props = defineProps({
   position: {
     type: String,
     required: true,
+    validator(value) {
+      return ['first', 'second'].includes(value)
+    },
   },
 })
 
@@ -40,7 +43,7 @@ const cardState = computed(() => {
 </template>
 
 <style scoped>
-/** Selects based off RunIDCaption internal styling */
+/** Selects based off RuneIDCaption internal styling */
 .controls .caption {
   min-width: 5em;
   min-height: 4em;

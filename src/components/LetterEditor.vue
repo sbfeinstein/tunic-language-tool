@@ -114,9 +114,9 @@ const validationMessage = computed(() => {
             ></line>
             <circle
               v-show="!editorStore.circleActive"
-              cx="40"
-              cy="160"
-              r="12"
+              :cx="editorStore.dataRef.circle.cx"
+              :cy="editorStore.dataRef.circle.cy"
+              :r="editorStore.dataRef.circle.r"
               @click="toggleCircle()"
             />
           </g>
@@ -132,9 +132,9 @@ const validationMessage = computed(() => {
             ></line>
             <circle
               v-show="editorStore.circleActive"
-              cx="40"
-              cy="160"
-              r="12"
+              :cx="editorStore.dataRef.circle.cx"
+              :cy="editorStore.dataRef.circle.cy"
+              :r="editorStore.dataRef.circle.r"
               @click="toggleCircle()"
             />
           </g>
