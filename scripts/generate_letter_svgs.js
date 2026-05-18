@@ -1,23 +1,21 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+import process from 'node:process'
+import { join } from 'node:path'
 import { LETTER_SVG_DATA, RUNE_LINES_TO_LETTER_LINES } from '@/constants/letters.js'
 import { RUNE_SVG_DATA, RUNES } from '@/constants/runes.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-const outputBasePath = join(__dirname, '..', 'src', 'assets', 'letters')
-const outputStyledPath = join(outputBasePath, 'styled')
-const outputUnstyledPath = join(outputBasePath, 'unstyled')
+const BASE_OUTPUT_PATH = join(process.cwd(), 'src', 'assets', 'letters')
+const STYLED_OUTPUT_PATH = join(BASE_OUTPUT_PATH, 'styled')
+const UNSTYLED_OUTPUT_PATH = join(BASE_OUTPUT_PATH, 'unstyled')
 
 async function deleteExistingSVGs() {
   const patterns = [
-    `${outputStyledPath}/letter_template.svg`,
-    `${outputUnstyledPath}/letter_template.svg`,
-    `${outputStyledPath}/[0-9][0-9][0-9][0-9][0-9].svg`,
-    `${outputUnstyledPath}/[0-9][0-9][0-9][0-9][0-9].svg`,
+    `${STYLED_OUTPUT_PATH}/letter_template.svg`,
+    `${UNSTYLED_OUTPUT_PATH}/letter_template.svg`,
+    `${STYLED_OUTPUT_PATH}/[0-9][0-9][0-9][0-9][0-9].svg`,
+    `${UNSTYLED_OUTPUT_PATH}/[0-9][0-9][0-9][0-9][0-9].svg`,
   ]
 
   for (const pattern of patterns) {
@@ -56,11 +54,11 @@ ${svgLines}${svgCircle}
 }
 
 async function writeSVG(name, outerLineIDs, innerLineIDs, hasCircle) {
-  let filename = `${outputStyledPath}/${name}.svg`
+  let filename = `${STYLED_OUTPUT_PATH}/${name}.svg`
   await fs.writeFile(filename, svgFor(outerLineIDs, innerLineIDs, hasCircle, true))
   console.log(`Created ${filename}`)
 
-  filename = `${outputUnstyledPath}/${name}.svg`
+  filename = `${UNSTYLED_OUTPUT_PATH}/${name}.svg`
   await fs.writeFile(filename, svgFor(outerLineIDs, innerLineIDs, hasCircle, false))
   console.log(`Created ${filename}`)
 }
