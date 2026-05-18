@@ -4,14 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "test:unit": "vitest",
+    "dev": "vite",
+    "format": "prettier --write --experimental-cli src/",
+    "generate:letters": "vite-node scripts/generate_letter_svgs.js",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "preview": "vite preview",
+    "test:unit": "vitest"
   },
   "dependencies": {
     "pinia": "^3.0.4",
@@ -34,7 +35,8 @@
     "prettier": "3.8.3",
     "vite": "^8.0.8",
     "vite-plugin-vue-devtools": "^8.1.1",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "vite-node": "^6.0.0"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

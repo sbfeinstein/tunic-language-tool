@@ -101,7 +101,7 @@ const validationMessage = computed(() => {
     <div class="editor">
       <div class="rune-container">
         <i><ClearIcon @click="clearLines()" /></i>
-        <svg id="rune" viewBox="0 0 85 180">
+        <svg id="rune" :viewBox="editorStore.dataRef.svgViewBox">
           <g class="inactive">
             <line
               v-for="line in editorStore.inactiveLines"
