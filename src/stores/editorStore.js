@@ -103,6 +103,20 @@ export const useEditorStore = defineStore('editor', () => {
   })
   const innerRuneInvalid = computed(() => !innerRuneEmpty.value && !innerRuneMatch.value)
 
+  const runesAreValidAndNotEmpty = computed(
+    () =>
+      !(outerRuneInvalid.value || innerRuneInvalid.value) &&
+      !(outerRuneEmpty.value && innerRuneEmpty.value) &&
+      !(circleActive.value && outerRuneEmpty.value) &&
+      !(circleActive.value && innerRuneEmpty.value),
+  )
+
+  const letterID = computed(() =>
+    runesAreValidAndNotEmpty.value
+      ? `${innerRuneMatch.value.id}${outerRuneMatch.value.id}${circleActive.value ? '1' : '0'}`
+      : null,
+  )
+
   // Published by store
   // --------------------------------------------------------------------------------
 
@@ -117,5 +131,7 @@ export const useEditorStore = defineStore('editor', () => {
     innerRuneMatch,
     innerRuneInvalid,
     circleActive,
+    runesAreValidAndNotEmpty,
+    letterID,
   }
 })
