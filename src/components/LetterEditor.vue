@@ -94,6 +94,12 @@ const validationMessage = computed(() => {
 
   return null
 })
+
+const showTranslation = computed(
+  () =>
+    !validationMessage .value &&
+    (editorStore.innerRuneMatch || editorStore.outerRuneMatch),
+)
 </script>
 
 <template>
@@ -144,10 +150,10 @@ const validationMessage = computed(() => {
     <div class="controls">
       <div class="rune-analysis">
         <EditorSelectionStatusCard position="first" />
-        <span class="operator">+</span>
+        <span class="operator" v-show="showTranslation">+</span>
         <EditorSelectionStatusCard position="second" />
-        <span class="operator">=</span>
-        <div class="translation">
+        <span class="operator" v-show="showTranslation">=</span>
+        <div class="translation" v-show="showTranslation">
           <EditorSelectionTranslationText position="first" />
           <EditorSelectionTranslationText position="second" />
         </div>
