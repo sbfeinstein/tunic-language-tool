@@ -1,0 +1,52 @@
+<script setup>
+import { ref, watch } from 'vue'
+import { LETTER_SVG_VITE_MODULES } from '@/constants/letters.js'
+
+const props = defineProps({
+  letterID: {
+    type: String,
+    required: true,
+  },
+})
+
+const htmlForSVG = ref(null)
+watch(
+  () => props.letterID,
+  async (newLetterID) => {
+    const path = `/src/assets/letters/unstyled/${newLetterID}.svg`
+    if (!LETTER_SVG_VITE_MODULES[path]) {
+      console.error(`SVG not found: ${path}`)
+      return
+    }
+    htmlForSVG.value = await LETTER_SVG_VITE_MODULES[path]()
+  },
+)
+</script>
+
+<template>
+  <div class="letter-image-container" v-html="htmlForSVG" />
+</template>
+
+<style scoped>
+.letter-image-container {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.letter-image-container :deep(svg) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  overflow: visible;
+  padding: 1em;
+
+  stroke: var(--color-outer-inner-active);
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+</style>

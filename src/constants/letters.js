@@ -1,3 +1,8 @@
+export const LETTER_SVG_VITE_MODULES = import.meta.glob('/src/assets/letters/unstyled/*.svg', {
+  query: '?raw',
+  import: 'default',
+})
+
 export const LETTER_SVG_DATA = Object.freeze({
   svgViewBox: '0 0 85 180',
   lines: {

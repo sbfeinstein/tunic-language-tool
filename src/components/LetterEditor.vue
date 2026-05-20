@@ -5,6 +5,7 @@ import ClearIcon from './icons/IconClear.vue'
 import { useEditorStore } from '@/stores/editorStore.js'
 import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
 import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
+import LetterImage from '@/components/LetterImage.vue'
 
 const props = defineProps({
   inputRune: {
@@ -100,6 +101,7 @@ const validationMessage = computed(() => {
   <div class="outer-panel">
     <div class="editor">
       <div class="rune-container">
+        <span class="letter-id" v-show="editorStore.letterID">{{ editorStore.letterID }}</span>
         <i><ClearIcon @click="clearLines()" /></i>
         <svg id="rune" :viewBox="editorStore.dataRef.svgViewBox">
           <g class="inactive">
@@ -144,15 +146,16 @@ const validationMessage = computed(() => {
     <div class="controls">
       <div class="rune-analysis">
         <EditorSelectionStatusCard position="first" />
-        <span class="operator" v-show="editorStore.runesAreValidAndNotEmpty">+</span>
+        <span class="operator" v-show="editorStore.validForTranslation">+</span>
         <EditorSelectionStatusCard position="second" />
-        <span class="operator" v-show="editorStore.runesAreValidAndNotEmpty">=</span>
-        <div class="translation" v-show="editorStore.runesAreValidAndNotEmpty">
+        <span class="operator" v-show="editorStore.validForTranslation">=</span>
+        <div class="translation" v-show="editorStore.validForTranslation">
           <EditorSelectionTranslationText position="first" />
           <EditorSelectionTranslationText position="second" />
         </div>
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
+      <LetterImage v-show="editorStore.letterID" :letterID="editorStore.letterID || ''" />
     </div>
   </div>
 </template>
@@ -273,5 +276,17 @@ i *:hover {
   align-items: center;
   text-align: center;
   font-size: 250%;
+}
+
+.letter-id {
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  color: var(--color-outer-inner-active);
+  background-color: var(--color-outer-inner-inactive);
+  font-family: monospace;
+  font-size: 1em;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 </style>
