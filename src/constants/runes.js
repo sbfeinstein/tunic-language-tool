@@ -65,6 +65,15 @@ export const RUNE_SVG_DATA = Object.freeze({
   },
 })
 
+export const LEGENDS = (() => {
+  return [
+    ...Object.values(RUNE_SVG_DATA.lines.outer),
+    ...Object.values(RUNE_SVG_DATA.lines.inner),
+  ].map((line) => {
+    return { id: line.id, x: (+line.x1 + +line.x2) / 2, y: (+line.y1 + +line.y2) / 2 }
+  })
+})()
+
 export const OUTER_LINE_IDS = Object.keys(RUNE_SVG_DATA.lines.outer)
 export const INNER_LINE_IDS = Object.keys(RUNE_SVG_DATA.lines.inner)
 

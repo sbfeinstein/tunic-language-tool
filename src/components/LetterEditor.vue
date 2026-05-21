@@ -1,6 +1,6 @@
 <script setup>
 import { computed, watch } from 'vue'
-import { INNER_LINE_IDS, OUTER_LINE_IDS } from '@/constants/runes.js'
+import { INNER_LINE_IDS, LEGENDS, OUTER_LINE_IDS } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
 import { useEditorStore } from '@/stores/editorStore.js'
 import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
@@ -140,6 +140,15 @@ const validationMessage = computed(() => {
               @click="toggleCircle()"
             />
           </g>
+          <text
+            v-for="legend in LEGENDS"
+            :x="+legend.x - 4"
+            :y="+legend.y + 5"
+            :key="`legend-${legend.id}`"
+            @click="toggleLine(legend.id)"
+          >
+            {{ legend.id }}
+          </text>
         </svg>
       </div>
     </div>
@@ -210,6 +219,16 @@ const validationMessage = computed(() => {
 .rune-container svg#rune g.active {
   stroke: var(--color-outer-inner-active);
   fill: var(--color-card-neutral);
+}
+
+.rune-container svg text {
+  fill: rgb(from var(--tlt-c-gray) r g b / 50%);
+  stroke: rgb(from var(--tlt-c-black) r g b / 50%);
+  stroke-width: 0.02em;
+  font-size: 10pt;
+  font-family: monospace;
+  cursor: pointer;
+  user-select: none;
 }
 
 .rune-container svg#rune g.active *:hover {
