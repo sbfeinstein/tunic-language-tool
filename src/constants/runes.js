@@ -70,7 +70,9 @@ export const LEGENDS = (() => {
     ...Object.values(RUNE_SVG_DATA.lines.outer),
     ...Object.values(RUNE_SVG_DATA.lines.inner),
   ].map((line) => {
-    return { id: line.id, x: (+line.x1 + +line.x2) / 2, y: (+line.y1 + +line.y2) / 2 }
+    const xd = line.id.length > 1 ? -8 : -2
+    const yd = -1
+    return { id: line.id, x: ((+line.x1 + +line.x2) / 2) + xd, y: ((+line.y1 + +line.y2) / 2) + yd }
   })
 })()
 

@@ -1,7 +1,8 @@
 <script setup>
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { INNER_LINE_IDS, LEGENDS, OUTER_LINE_IDS } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
+import LegendIcon from '@/components/icons/IconLegend.vue'
 import { useEditorStore } from '@/stores/editorStore.js'
 import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
 import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
@@ -18,6 +19,7 @@ const props = defineProps({
 const editorStore = useEditorStore()
 
 const toggleCircle = () => (editorStore.dataRef.circle.active = !editorStore.dataRef.circle.active)
+const showLegend = ref(false)
 
 /**
  * Sets the rune lines with the given IDs to active and other outer rune lines to inactive, from
@@ -102,7 +104,8 @@ const validationMessage = computed(() => {
     <div class="editor">
       <div class="rune-container">
         <span class="letter-id" v-show="editorStore.letterID">{{ editorStore.letterID }}</span>
-        <i><ClearIcon @click="clearLines()" /></i>
+        <i class="clear-icon"><ClearIcon @click="clearLines()" /></i>
+        <i class="legend-icon"><LegendIcon @click="showLegend = !showLegend" /></i>
         <svg id="rune" :viewBox="editorStore.dataRef.svgViewBox">
           <g class="inactive">
             <line
@@ -141,9 +144,10 @@ const validationMessage = computed(() => {
             />
           </g>
           <text
+            v-show="showLegend"
             v-for="legend in LEGENDS"
-            :x="+legend.x - 4"
-            :y="+legend.y + 5"
+            :x="legend.x"
+            :y="legend.y"
             :key="`legend-${legend.id}`"
             @click="toggleLine(legend.id)"
           >
@@ -222,8 +226,8 @@ const validationMessage = computed(() => {
 }
 
 .rune-container svg text {
-  fill: rgb(from var(--tlt-c-gray) r g b / 50%);
-  stroke: rgb(from var(--tlt-c-black) r g b / 50%);
+  fill: rgb(from var(--tlt-c-gray) r g b / 80%);
+  stroke: rgb(from var(--tlt-c-black) r g b / 80%);
   stroke-width: 0.02em;
   font-size: 10pt;
   font-family: monospace;
@@ -244,7 +248,7 @@ const validationMessage = computed(() => {
   stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
 }
 
-i {
+.clear-icon {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -256,7 +260,20 @@ i {
   filter: var(--filter-drop-shadow-above);
 }
 
-i *:hover {
+.legend-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50px;
+  right: 0;
+  stroke: var(--tlt-c-gray);
+  fill: transparent;
+  stroke-width: 2px;
+  filter: var(--filter-drop-shadow-above);
+}
+
+.clear-icon *:hover,
+.legend-icon *:hover {
   stroke: color-mix(in srgb, var(--color-outer-inner-inactive), var(--tlt-c-black) 60%);
   cursor: pointer;
 }
