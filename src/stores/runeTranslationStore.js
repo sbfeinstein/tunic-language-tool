@@ -1,14 +1,14 @@
 import { computed } from 'vue'
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import defaultRuneData from '@/assets/defaultRuneTranslations.json'
+import defaultRuneTranslations from '@/assets/defaultRuneTranslations.json'
 
 export const useRuneTranslationStore = defineStore('rune-translation', () => {
   const outer = computed(() => {
-    return Object.fromEntries(defaultRuneData.outerRunes.map((data) => [data.id, data]))
+    return Object.fromEntries(defaultRuneTranslations.outerRunes.map((data) => [data.id, data]))
   })
 
   const inner = computed(() => {
-    return Object.fromEntries(defaultRuneData.innerRunes.map((data) => [data.id, data]))
+    return Object.fromEntries(defaultRuneTranslations.innerRunes.map((data) => [data.id, data]))
   })
 
   return { outer, inner }
