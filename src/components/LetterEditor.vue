@@ -316,8 +316,8 @@ const validationMessage = computed(() => {
 
 .letter-id {
   position: absolute;
-  top: 2%;
-  left: 3%;
+  top: 0;
+  left: 0;
   color: var(--color-outer-inner-active);
   background-color: var(--color-outer-inner-inactive);
   font-family: monospace;
