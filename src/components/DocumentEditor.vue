@@ -11,7 +11,17 @@ const editor = useEditor({
 })
 
 const exportDocument = () => {
-  console.log('Export')
+  const content = JSON.stringify(editor.value.getJSON())
+
+  const filename = 'tunic-language-tool.json'
+  const element = document.createElement('a')
+  element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(content))
+  element.setAttribute('download', filename)
+  element.style.display = 'none'
+  document.body.appendChild(element)
+
+  element.click()
+  document.body.removeChild(element)
 }
 </script>
 

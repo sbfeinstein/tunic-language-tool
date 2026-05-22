@@ -169,6 +169,7 @@ const validationMessage = computed(() => {
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
       <LetterImage v-show="editorStore.letterID" :letterID="editorStore.letterID || ''" />
+      <input type="button" v-show="editorStore.letterID"  value="insert" />
     </div>
   </div>
 </template>
