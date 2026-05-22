@@ -4,6 +4,7 @@ import HorizontalSplitter from '@/components/HorizontalSplitter.vue'
 import RuneKeyboard from '@/components/RuneKeyboard.vue'
 import LetterEditor from '@/components/LetterEditor.vue'
 import { ref } from 'vue'
+import DocumentEditor from '@/components/DocumentEditor.vue'
 
 const selectedRune = ref(null)
 
@@ -20,8 +21,22 @@ const handleSelectedRune = (rune) => {
         <template #bottom><LetterEditor :input-rune="selectedRune" /></template>
       </HorizontalSplitter>
     </template>
-    <template #right>Document</template>
+    <template #right><DocumentEditor class="editor" /></template>
   </VerticalSplitter>
 </template>
 
-<style scoped></style>
+<style scoped>
+.editor {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+/* Ensure the content area fills the parent */
+.editor :deep(.ProseMirror) {
+  height: 100%;
+}
+
+</style>
