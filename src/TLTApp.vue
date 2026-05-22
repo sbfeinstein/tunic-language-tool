@@ -28,15 +28,5 @@ const handleSelectedRune = (rune) => {
 <style scoped>
 .editor {
   height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
 }
-
-/* Ensure the content area fills the parent */
-.editor :deep(.ProseMirror) {
-  height: 100%;
-}
-
 </style>
