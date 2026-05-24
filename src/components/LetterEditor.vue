@@ -4,6 +4,7 @@ import { INNER_LINE_IDS, LEGENDS, OUTER_LINE_IDS } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
 import LegendIcon from '@/components/icons/IconLegend.vue'
 import { useEditorStore } from '@/stores/editorStore.js'
+import { useDocumentStore } from '@/stores/documentStore.js'
 import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
 import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
 import LetterImage from '@/components/LetterImage.vue'
@@ -17,6 +18,7 @@ const props = defineProps({
 })
 
 const editorStore = useEditorStore()
+const docStore = useDocumentStore()
 
 const toggleCircle = () => (editorStore.dataRef.circle.active = !editorStore.dataRef.circle.active)
 const showLegend = ref(false)
@@ -69,6 +71,21 @@ watch(
     deep: true,
   },
 )
+
+const insertRune = () => {
+  if (!editorStore.letterID) return
+
+  docStore.editor
+    .chain()
+    .insertContent({
+      type: 'runeLetter',
+      attrs: {
+        letterID: editorStore.letterID,
+      },
+    })
+    .focus()
+    .run()
+}
 
 const validationMessage = computed(() => {
   if (editorStore.outerRuneInvalid && editorStore.innerRuneInvalid) {
@@ -169,7 +186,7 @@ const validationMessage = computed(() => {
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
       <LetterImage v-show="editorStore.letterID" :letterID="editorStore.letterID || ''" />
-      <input type="button" v-show="editorStore.letterID" value="insert" />
+      <input type="button" v-show="editorStore.letterID" value="insert" @click="insertRune" />
     </div>
   </div>
 </template>
@@ -328,6 +345,6 @@ const validationMessage = computed(() => {
 }
 
 .letter-image-container {
-  padding-top:15px;
+  padding-top: 15px;
 }
 </style>
