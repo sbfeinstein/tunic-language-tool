@@ -23,36 +23,40 @@
       "type": "paragraph",
       "content": [
         { "type": "text", "text": "Rune example: " },
-
         {
-          "type": "runeLetter",
-          "attrs": {
-            "letterID": "18131"
-          }
-        },
-        {
-          "type": "runeLetter",
-          "attrs": {
-            "letterID": "16100"
-          }
-        },
-        {
-          "type": "runeLetter",
-          "attrs": {
-            "letterID": "08001"
-          }
-        },
-        {
-          "type": "runeLetter",
-          "attrs": {
-            "letterID": "03080"
-          }
-        },
-        {
-          "type": "runeLetter",
-          "attrs": {
-            "letterID": "00120"
-          }
+          "type": "runeWord",
+          "content": [
+            {
+              "type": "runeLetter",
+              "attrs": {
+                "letterID": "18131"
+              }
+            },
+            {
+              "type": "runeLetter",
+              "attrs": {
+                "letterID": "16100"
+              }
+            },
+            {
+              "type": "runeLetter",
+              "attrs": {
+                "letterID": "08001"
+              }
+            },
+            {
+              "type": "runeLetter",
+              "attrs": {
+                "letterID": "03080"
+              }
+            },
+            {
+              "type": "runeLetter",
+              "attrs": {
+                "letterID": "00120"
+              }
+            }
+          ]
         }
       ]
     },

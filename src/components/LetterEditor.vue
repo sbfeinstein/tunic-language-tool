@@ -75,16 +75,41 @@ watch(
 const insertRune = () => {
   if (!editorStore.letterID) return
 
-  docStore.editor
-    .chain()
-    .insertContent({
-      type: 'runeLetter',
-      attrs: {
-        letterID: editorStore.letterID,
-      },
-    })
-    .focus()
-    .run()
+  const { editor } = docStore
+  const { state } = editor
+  const { selection } = state
+  const { $from } = selection
+
+  // Check if we are already inside a runeWord
+  // We look at the parent node of the current selection
+  const isInRuneWord = $from.node($from.depth).type.name === 'runeWord'
+
+  if (isInRuneWord) {
+    editor.chain()
+      .insertContent({
+        type: 'runeLetter',
+        attrs: {
+          letterID: editorStore.letterID,
+        },
+      })
+      .focus()
+      .run()
+  } else {
+    editor.chain()
+      .insertContent({
+        type: 'runeWord',
+        content: [
+          {
+            type: 'runeLetter',
+            attrs: {
+              letterID: editorStore.letterID,
+            },
+          },
+        ],
+      })
+      .focus()
+      .run()
+  }
 }
 
 const validationMessage = computed(() => {
