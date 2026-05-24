@@ -8,11 +8,22 @@ export default Node.create({
   inline: true,
   selectable: true,
   draggable: true,
+  atom: true,
 
   addAttributes() {
     return {
       letterID: {
-        default: null,
+        default: '',
+        // Forces the extracted value to be parsed or cast safely as a string
+        parseHTML: (element) => {
+          const val = element.getAttribute('data-letter-id')
+          return val !== null ? String(val) : ''
+        },
+        renderHTML: (attributes) => {
+          return {
+            'data-letter-id': attributes.letterID,
+          }
+        },
       },
     }
   },
