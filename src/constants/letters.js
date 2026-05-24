@@ -24,7 +24,7 @@ export const LETTER_SVG_DATA = Object.freeze({
       10: { id: '10', x1: '50', y1: '85', x2: '50', y2: '125', type: 'inner' },
       11: { id: '11', x1: '10', y1: '105', x2: '50', y2: '85', type: 'inner' },
       12: { id: '12', x1: '10', y1: '35', x2: '50', y2: '55', type: 'inner' },
-      13: { id: '13', x1: '10', y1: '70', x2: '90', y2: '70', type: 'inner' },
+      13: { id: '13', x1: '0', y1: '70', x2: '100', y2: '70', type: 'inner' },
     },
   },
   circle: {

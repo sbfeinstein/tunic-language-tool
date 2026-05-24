@@ -13,9 +13,13 @@ const htmlForSVG = ref(null)
 watch(
   () => props.letterID,
   async (newLetterID) => {
+    if (!newLetterID) {
+      return
+    }
+
     const path = `/src/assets/letters/unstyled/${newLetterID}.svg`
     if (!LETTER_SVG_VITE_MODULES[path]) {
-      console.error(`SVG not found: ${path}`)
+      console.warn(`SVG not found: ${path}`)
       return
     }
     htmlForSVG.value = await LETTER_SVG_VITE_MODULES[path]()
