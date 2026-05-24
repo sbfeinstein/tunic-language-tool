@@ -1,0 +1,83 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "Welcome to Tunic Language Tool!" }]
+    },
+    { "type": "paragraph" },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "You can edit this document in English:" }]
+    },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "- Typing in English" }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "- Using Copy / Paste" }] },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "- Undo/Redo is support (e.g. using control-Z or command-Z)" }
+      ]
+    },
+    { "type": "paragraph" },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "Rune example: " },
+
+        {
+          "type": "runeLetter",
+          "attrs": {
+            "letterID": "16100"
+          }
+        }
+      ]
+    },
+    { "type": "paragraph" },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "You can insert Tunic \"Rune Letters\":" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "- Using the Rune keyboard and Letter editor on the left" }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "- Only valid Letters may be inserted" }]
+    },
+    { "type": "paragraph" },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "A Rune Letter is valid if all of these are true:" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "- There are no selected outer edges OR they exactly match a single Outer Rune"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "- There are no selected inner edges OR they exactly match a single Inner Rune"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "- The Circle is unselected OR both the outer and inner edges are not empty"
+        }
+      ]
+    }
+  ]
+}

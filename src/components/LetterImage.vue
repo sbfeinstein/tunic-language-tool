@@ -20,6 +20,9 @@ watch(
     }
     htmlForSVG.value = await LETTER_SVG_VITE_MODULES[path]()
   },
+  {
+    immediate: true
+  }
 )
 </script>
 
@@ -29,6 +32,7 @@ watch(
 
 <style scoped>
 .letter-image-container {
+  display: inline-block;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -43,7 +47,6 @@ watch(
   height: 100%;
   object-fit: contain;
   overflow: visible;
-  padding: 1em;
 
   stroke: var(--color-outer-inner-active);
   stroke-width: 10px;

@@ -169,7 +169,7 @@ const validationMessage = computed(() => {
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
       <LetterImage v-show="editorStore.letterID" :letterID="editorStore.letterID || ''" />
-      <input type="button" v-show="editorStore.letterID"  value="insert" />
+      <input type="button" v-show="editorStore.letterID" value="insert" />
     </div>
   </div>
 </template>
@@ -325,5 +325,9 @@ const validationMessage = computed(() => {
   font-size: 1em;
   padding: 2px 4px;
   border-radius: 4px;
+}
+
+.letter-image-container {
+  padding-top:15px;
 }
 </style>

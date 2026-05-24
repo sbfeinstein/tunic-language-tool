@@ -1,14 +1,10 @@
 <script setup>
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
-import { UndoRedo } from '@tiptap/extensions'
+import { EditorContent } from '@tiptap/vue-3'
+import { useDocumentStore } from '@/stores/documentStore.js'
+import { computed } from 'vue'
 
-const editor = useEditor({
-  content: '<p>But what does it all mean? 🎉</p>',
-  extensions: [Document, Paragraph, Text, UndoRedo],
-})
+const docStore = useDocumentStore()
+const editor = computed(() => docStore.editor)
 
 const exportDocument = () => {
   const content = JSON.stringify(editor.value.getJSON())
@@ -64,5 +60,12 @@ const exportDocument = () => {
   padding: 5px;
   overflow: auto;
   font-size: 22pt;
+}
+
+:deep(.rune-letter) {
+  width: 1.5em;
+  display:inline-block;
+  vertical-align: middle;
+  padding:0;
 }
 </style>
