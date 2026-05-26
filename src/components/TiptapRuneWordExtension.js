@@ -8,7 +8,7 @@ export default Node.create({
   group: 'inline',
   content: 'runeLetter+',
   inline: true,
-  selectable: true,
+  selectable: false,
   draggable: true,
 
   parseHTML() {
@@ -37,52 +37,58 @@ export default Node.create({
           const { tr } = newState
           let modified = false
 
-          // 1. Split runeWord if it contains non-runeLetter nodes
+          // 1. Wrap isolated runeLetter nodes into runeWord
           newState.doc.descendants((node, pos) => {
-            if (node.type.name === 'runeWord') {
-              let firstNonRuneIndex = -1
-              for (let i = 0; i < node.childCount; i++) {
-                if (node.child(i).type.name !== 'runeLetter') {
-                  firstNonRuneIndex = i
-                  break
-                }
-              }
-
-              if (firstNonRuneIndex !== -1) {
-                // We need to split the runeWord at this point
-                // Actually, the schema 'runeLetter+' should already prevent this
-                // but if it somehow happens (e.g. through programmatic insertion bypassing schema)
-                // we'd handle it here.
-                // However, Tiptap's schema is quite strict.
+            if (node.type.name === 'runeLetter') {
+              const $pos = newState.doc.resolve(pos)
+              const parent = $pos.parent
+              if (parent.type.name !== 'runeWord') {
+                // This runeLetter is not inside a runeWord, wrap it
+                const runeWord = newState.schema.nodes.runeWord.create(null, node)
+                tr.replaceWith(tr.mapping.map(pos), tr.mapping.map(pos + node.nodeSize), runeWord)
+                modified = true
               }
             }
             return true
           })
 
           // 2. Merge adjacent runeWord nodes
-          newState.doc.descendants((node, pos) => {
-            if (node.type.name !== 'paragraph') return true
+          const mergeRuneWords = (transaction) => {
+            const currentDoc = transaction.doc
+            let merged = false
+            currentDoc.descendants((node, pos) => {
+              if (node.isLeaf || node.type.name === 'runeWord') return false
 
-            // We iterate backwards to avoid position shift issues
-            for (let i = node.childCount - 1; i > 0; i--) {
-              const currentChild = node.child(i)
-              const prevChild = node.child(i - 1)
+              for (let i = node.childCount - 1; i > 0; i--) {
+                const currentChild = node.child(i)
+                const prevChild = node.child(i - 1)
 
-              if (currentChild.type.name === 'runeWord' && prevChild.type.name === 'runeWord') {
-                const currentChildPos = pos + 1 + node.offsetAt(i)
-                const prevChildPos = pos + 1 + node.offsetAt(i - 1)
-                const insertPos = prevChildPos + prevChild.nodeSize - 1
+                if (currentChild.type.name === 'runeWord' && prevChild.type.name === 'runeWord') {
+                  const currentChildPos = pos + 1 + node.offsetAt(i)
+                  const prevChildPos = pos + 1 + node.offsetAt(i - 1)
 
-                tr.insert(insertPos, currentChild.content)
-                tr.delete(tr.mapping.map(currentChildPos), tr.mapping.map(currentChildPos + currentChild.nodeSize))
+                  const mappedCurrentChildPos = transaction.mapping.map(currentChildPos)
+                  const mappedPrevChildPos = transaction.mapping.map(prevChildPos)
 
-                modified = true
+                  // Position to insert content of currentChild into prevChild
+                  const insertPos = mappedPrevChildPos + prevChild.nodeSize - 1
+
+                  transaction.insert(insertPos, currentChild.content)
+                  transaction.delete(transaction.mapping.map(currentChildPos), transaction.mapping.map(currentChildPos + currentChild.nodeSize))
+                  merged = true
+                }
               }
-            }
-            return false
-          })
+              return true
+            })
+            return merged
+          }
 
-          return modified ? tr : null
+          let finalTr = tr
+          while (mergeRuneWords(finalTr)) {
+            modified = true
+          }
+
+          return modified ? finalTr : null
         },
       }),
     ]

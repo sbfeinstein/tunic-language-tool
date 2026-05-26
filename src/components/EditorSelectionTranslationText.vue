@@ -1,41 +1,85 @@
 <script setup>
 import { computed } from 'vue'
-import { useEditorStore } from '@/stores/editorStore.js'
 import { useRuneTranslationStore } from '@/stores/runeTranslationStore.js'
+import RuneIDCaption from '@/components/RuneIDCaption.vue'
 
 const props = defineProps({
   position: {
     type: String,
     required: true,
   },
+  outerRuneID: {
+    type: String,
+    default: '00',
+  },
+  innerRuneID: {
+    type: String,
+    default: '00',
+  },
+  circleActive: {
+    type: Boolean,
+    required: true,
+  },
 })
 
-const editorStore = useEditorStore()
 const translationStore = useRuneTranslationStore()
 
-const translationData = computed(() => {
+const translation = computed(() => {
+  let type, store, runeID
   if (
-    (props.position === 'first' && !editorStore.circleActive) ||
-    (props.position === 'second' && editorStore.circleActive)
+    (props.position === 'first' && !props.circleActive) ||
+    (props.position === 'second' && props.circleActive)
   ) {
-    return translationStore.inner[editorStore.innerRuneMatch?.id]?.translation
+    type = 'inner'
+    store = translationStore.inner
+    runeID = props.innerRuneID
+  } else {
+    type = 'outer'
+    store = translationStore.outer
+    runeID = props.outerRuneID
   }
-  return translationStore.outer[editorStore.outerRuneMatch?.id]?.translation
+
+  return {
+    type,
+    id: runeID,
+    notEmpty: runeID !== '00',
+    text: store[runeID]?.translation?.join('') || '?',
+    cssClass: store[runeID]?.translation?.length > 0 ? 'tooltip' : 'tooltip -unknown',
+  }
 })
-
-const translationText = computed(() =>
-  translationData.value ? translationData.value?.join('<br>') || '??' : '',
-)
-
-const translationCSSClass = computed(() => (translationData.value?.length > 0 ? '' : '-unknown'))
 </script>
 
 <template>
-  <span v-html="translationText" :class="translationCSSClass" />
+  <span v-show="translation.notEmpty" :class="translation.cssClass"
+    ><span class="tooltiptext">
+      <RuneIDCaption :force-text="translation.id" :force-type="translation.type" /></span
+    >{{ translation.text }}</span
+  >
 </template>
 
 <style scoped>
 .-unknown {
   color: var(--tlt-c-gray);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltiptext {
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  width: 130px;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -65px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 </style>

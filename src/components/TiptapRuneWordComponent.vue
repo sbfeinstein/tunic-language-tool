@@ -1,16 +1,52 @@
 <script setup>
-import { NodeViewContent, NodeViewWrapper } from '@tiptap/vue-3'
+import { computed, useId } from 'vue'
+import { nodeViewProps, NodeViewContent, NodeViewWrapper } from '@tiptap/vue-3'
+import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
 
+const props = defineProps(nodeViewProps)
+
+const letters = computed(() => {
+  const ids = []
+  props.node.content.forEach((node) => {
+    if (node.type.name === 'runeLetter') {
+      const letterID = node.attrs.letterID
+      ids.push({
+        id: letterID,
+        innerRuneID: letterID.slice(0, 2),
+        outerRuneID: letterID.slice(2, 4),
+        circleActive: letterID[4] === '1',
+      })
+    }
+  })
+  return ids
+})
+
+const baseId = useId()
 </script>
 
 <template>
   <node-view-wrapper class="rune-word">
-    <div class="letters-container">
+    <span class="letters-container">
       <node-view-content />
-    </div>
-    <div class="translation-placeholder">
-      translation
-    </div>
+    </span>
+    <span class="translation-placeholder">
+      <span v-for="letter in letters" :key="`${baseId}-${letter.id}-for`">
+        <EditorSelectionTranslationText
+          position="first"
+          :innerRuneID="letter.innerRuneID"
+          :outerRuneID="letter.outerRuneID"
+          :circleActive="letter.circleActive"
+          :key="`${baseId}-${letter.id}-first`"
+        />
+        <EditorSelectionTranslationText
+          position="second"
+          :innerRuneID="letter.innerRuneID"
+          :outerRuneID="letter.outerRuneID"
+          :circleActive="letter.circleActive"
+          :key="`${baseId}-${letter.id}-second`"
+        />
+      </span>
+    </span>
   </node-view-wrapper>
 </template>
 
@@ -37,12 +73,11 @@ import { NodeViewContent, NodeViewWrapper } from '@tiptap/vue-3'
 }
 
 .translation-placeholder {
-  font-size: 0.4em;
+  font-size: 0.8em;
   color: var(--color-outer-inner-active);
   text-align: center;
   margin-top: -4px;
   font-family: sans-serif;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 

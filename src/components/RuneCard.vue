@@ -65,12 +65,12 @@ const translationData = computed(() => {
 })
 
 const translationText = computed(() => {
-  return translationData.value.translation.join('\n') || '??'
+  return translationData.value.translation.join('\n') || '?'
 })
 
 const translationClass = computed(() => {
   let cls = 'translation'
-  if (translationText.value !== '??') {
+  if (translationText.value !== '?') {
     cls += ' known-translation'
   }
   if (translationData.value.emphasized) {
