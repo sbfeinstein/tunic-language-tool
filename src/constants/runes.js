@@ -124,7 +124,7 @@ export const RUNES = Object.freeze({
     {
       id: '09',
       type: 'outer',
-      lines: ['1', '4', '5'],
+      lines: ['1', '3', '4', '5'],
     },
     {
       id: '10',

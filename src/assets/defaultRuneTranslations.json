@@ -15,13 +15,13 @@
     {
       "id": "03",
       "type": "outer",
-      "translation": [],
+      "translation": ["e"],
       "emphasized": true
     },
     {
       "id": "04",
       "type": "outer",
-      "translation": [],
+      "translation": ["oo"],
       "emphasized": false
     },
     {
@@ -39,19 +39,19 @@
     {
       "id": "07",
       "type": "outer",
-      "translation": [],
+      "translation": ["E"],
       "emphasized": false
     },
     {
       "id": "08",
       "type": "outer",
-      "translation": ["t", "oo"],
+      "translation": ["oo"],
       "emphasized": false
     },
     {
       "id": "09",
       "type": "outer",
-      "translation": [],
+      "translation": ["y"],
       "emphasized": false
     },
     {
@@ -75,13 +75,13 @@
     {
       "id": "13",
       "type": "outer",
-      "translation": [],
+      "translation": ["A"],
       "emphasized": false
     },
     {
       "id": "14",
       "type": "outer",
-      "translation": [],
+      "translation": ["i"],
       "emphasized": false
     },
     {
@@ -99,7 +99,7 @@
     {
       "id": "17",
       "type": "outer",
-      "translation": [],
+      "translation": ["o"],
       "emphasized": false
     },
     {
@@ -113,7 +113,7 @@
     {
       "id": "01",
       "type": "inner",
-      "translation": [],
+      "translation": ["m"],
       "emphasized": false
     },
     {
@@ -143,25 +143,25 @@
     {
       "id": "06",
       "type": "inner",
-      "translation": ["t", "oo"],
+      "translation": ["t"],
       "emphasized": false
     },
     {
       "id": "07",
       "type": "inner",
-      "translation": [],
+      "translation": ["d"],
       "emphasized": false
     },
     {
       "id": "08",
       "type": "inner",
-      "translation": ["c", "k"],
+      "translation": ["k"],
       "emphasized": false
     },
     {
       "id": "09",
       "type": "inner",
-      "translation": [],
+      "translation": ["g"],
       "emphasized": false
     },
     {
@@ -179,7 +179,7 @@
     {
       "id": "12",
       "type": "inner",
-      "translation": ["f", "O"],
+      "translation": ["f"],
       "emphasized": false
     },
     {
@@ -233,7 +233,7 @@
     {
       "id": "21",
       "type": "inner",
-      "translation": [],
+      "translation": ["r"],
       "emphasized": false
     },
     {
@@ -251,7 +251,7 @@
     {
       "id": "24",
       "type": "inner",
-      "translation": [],
+      "translation": ["l"],
       "emphasized": false
     }
   ]
