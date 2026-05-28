@@ -1,30 +1,19 @@
 import { mergeAttributes, Node } from '@tiptap/core'
-import { VueNodeViewRenderer } from '@tiptap/vue-3'
+import { Extension, NodePos, VueNodeViewRenderer } from '@tiptap/vue-3'
 import TiptapRuneWordComponent from '@/components/TiptapRuneWordComponent.vue'
-import { Plugin, PluginKey } from '@tiptap/pm/state'
 
-export default Node.create({
-  name: 'runeWord',
-  group: 'block',
-  content: 'block+',
-  inline: false,
-  selectable: false,
-  draggable: false,
+export default Extension.create({
+  name: 'runeWordMergeAndSplit',
 
-  parseHTML() {
-    return [
-      {
-        tag: 'rune-word',
-      },
-    ]
-  },
+  onUpdate(event) {
+    const fromPos = event.transaction.steps[0].from
+    const toPos = event.transaction.steps[0].to
+    const node = event.editor.state.doc.nodeAt(fromPos)
+    const isLeaf = node?.isLeaf || false
+    const isRuneLetter = node?.type?.name === 'runeLetter'
 
-  renderHTML({ HTMLAttributes }) {
-    return ['rune-word', mergeAttributes(HTMLAttributes), 0]
-  },
-
-  addNodeView() {
-    return VueNodeViewRenderer(TiptapRuneWordComponent)
+    const nodePos = event.editor.$pos(fromPos)
+    console.log('MergeAndSplit event: update')
   },
 
   // addProseMirrorPlugins() {

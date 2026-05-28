@@ -6,7 +6,7 @@ export default Node.create({
   name: 'runeLetter',
   group: 'inline',
   inline: true,
-  selectable: true,
+  selectable: false,
   draggable: true,
   atom: true,
 
