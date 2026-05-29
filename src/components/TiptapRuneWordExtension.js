@@ -1,7 +1,44 @@
 import { mergeAttributes, Node } from '@tiptap/core'
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
 import TiptapRuneWordComponent from '@/components/TiptapRuneWordComponent.vue'
-import { Plugin, PluginKey } from '@tiptap/pm/state'
+import { Plugin, PluginKey, Selection, TextSelection } from '@tiptap/pm/state'
+
+/**
+ * Move the caret (or extend the selection) one position left/right through the
+ * model, dispatching the selection directly instead of relying on native
+ * browser caret movement.
+ *
+ * The runeWord node view renders as a nested inline-flex/SVG element, which the
+ * browser refuses to step the caret into, so arrow keys get stuck at the
+ * boundary — both for plain caret movement and for Shift-extended selections.
+ * We only take over when a runeWord is adjacent to (or contains) the moving
+ * head; otherwise we return false so plain text navigation behaves normally.
+ *
+ * When `extend` is true the anchor stays fixed and only the head moves, which
+ * preserves Shift+Arrow selection semantics.
+ */
+const moveThroughRuneWord = (dir, extend = false) => ({ state, dispatch }) => {
+  const { selection } = state
+  if (!extend && !selection.empty) return false
+
+  const { $head } = selection
+  const insideRuneWord = $head.parent.type.name === 'runeWord'
+  const neighbor = dir === 1 ? $head.nodeAfter : $head.nodeBefore
+  const touchingRuneWord = neighbor?.type.name === 'runeWord'
+  if (!insideRuneWord && !touchingRuneWord) return false
+
+  const target = selection.head + dir
+  if (target < 0 || target > state.doc.content.size) return false
+
+  const $target = state.doc.resolve(target)
+  const nextSelection = extend
+    ? TextSelection.between(selection.$anchor, $target, dir)
+    : Selection.near($target, dir)
+  if (nextSelection.eq(selection)) return false
+
+  if (dispatch) dispatch(state.tr.setSelection(nextSelection).scrollIntoView())
+  return true
+}
 
 export default Node.create({
   name: 'runeWord',
@@ -25,6 +62,15 @@ export default Node.create({
 
   addNodeView() {
     return VueNodeViewRenderer(TiptapRuneWordComponent)
+  },
+
+  addKeyboardShortcuts() {
+    return {
+      ArrowRight: () => this.editor.commands.command(moveThroughRuneWord(1)),
+      ArrowLeft: () => this.editor.commands.command(moveThroughRuneWord(-1)),
+      'Shift-ArrowRight': () => this.editor.commands.command(moveThroughRuneWord(1, true)),
+      'Shift-ArrowLeft': () => this.editor.commands.command(moveThroughRuneWord(-1, true)),
+    }
   },
 
   addProseMirrorPlugins() {
