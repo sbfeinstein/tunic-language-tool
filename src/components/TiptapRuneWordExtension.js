@@ -211,67 +211,72 @@ export default Node.create({
     return [
       new Plugin({
         key: new PluginKey('runeWordAutoMerge'),
+        // Normalize inline rune content: collapse every maximal run of
+        // directly-adjacent rune nodes (loose runeLetters and/or runeWords)
+        // into a single runeWord. Rune words separated by text are left alone.
         appendTransaction: (transactions, oldState, newState) => {
           if (!transactions.some((tr) => tr.docChanged)) return null
 
-          const { tr } = newState
-          let modified = false
+          const runeWordType = newState.schema.nodes.runeWord
+          const isRune = (node) =>
+            node.type.name === 'runeLetter' || node.type.name === 'runeWord'
 
-          // 1. Wrap isolated runeLetter nodes into runeWord
+          // Collect replacement ranges from the (unchanging) new doc so we can
+          // apply them last-to-first below without remapping positions.
+          const replacements = []
+
           newState.doc.descendants((node, pos) => {
-            if (node.type.name === 'runeLetter') {
-              const $pos = newState.doc.resolve(pos)
-              const parent = $pos.parent
-              if (parent.type.name !== 'runeWord') {
-                // This runeLetter is not inside a runeWord, wrap it
-                const runeWord = newState.schema.nodes.runeWord.create(null, node)
-                tr.replaceWith(tr.mapping.map(pos), tr.mapping.map(pos + node.nodeSize), runeWord)
-                modified = true
+            if (!node.isTextblock) return true
+
+            const children = []
+            node.forEach((child, offset) => children.push({ child, offset }))
+
+            for (let i = 0; i < children.length; ) {
+              if (!isRune(children[i].child)) {
+                i++
+                continue
               }
+
+              // Gather the contiguous run of rune nodes, flattening their letters.
+              const letters = []
+              let j = i
+              while (j < children.length && isRune(children[j].child)) {
+                const runeNode = children[j].child
+                if (runeNode.type.name === 'runeLetter') {
+                  letters.push(runeNode)
+                } else {
+                  runeNode.forEach((letter) => letters.push(letter))
+                }
+                j++
+              }
+
+              // Skip runs that are already a single, well-formed runeWord — this
+              // keeps the transformation idempotent (its own output re-runs clean).
+              const alreadyNormalized =
+                j - i === 1 && children[i].child.type.name === 'runeWord'
+              if (!alreadyNormalized) {
+                const first = children[i]
+                const last = children[j - 1]
+                replacements.push({
+                  from: pos + 1 + first.offset,
+                  to: pos + 1 + last.offset + last.child.nodeSize,
+                  runeWord: runeWordType.create(null, letters),
+                })
+              }
+              i = j
             }
-            return true
+
+            return false
           })
 
-          // 2. Merge adjacent runeWord nodes
-          const mergeRuneWords = (transaction) => {
-            const currentDoc = transaction.doc
-            let merged = false
-            currentDoc.descendants((node, pos) => {
-              if (node.isLeaf || node.type.name === 'runeWord') return false
+          if (!replacements.length) return null
 
-              for (let i = node.childCount - 1; i > 0; i--) {
-                const currentChild = node.child(i)
-                const prevChild = node.child(i - 1)
-
-                if (currentChild.type.name === 'runeWord' && prevChild.type.name === 'runeWord') {
-                  const currentChildPos = pos + 1 + node.offsetAt(i)
-                  const prevChildPos = pos + 1 + node.offsetAt(i - 1)
-
-                  const mappedCurrentChildPos = transaction.mapping.map(currentChildPos)
-                  const mappedPrevChildPos = transaction.mapping.map(prevChildPos)
-
-                  // Position to insert content of currentChild into prevChild
-                  const insertPos = mappedPrevChildPos + prevChild.nodeSize - 1
-
-                  transaction.insert(insertPos, currentChild.content)
-                  transaction.delete(
-                    transaction.mapping.map(currentChildPos),
-                    transaction.mapping.map(currentChildPos + currentChild.nodeSize),
-                  )
-                  merged = true
-                }
-              }
-              return true
-            })
-            return merged
+          const { tr } = newState
+          for (let k = replacements.length - 1; k >= 0; k--) {
+            const { from, to, runeWord } = replacements[k]
+            tr.replaceWith(from, to, runeWord)
           }
-
-          let finalTr = tr
-          while (mergeRuneWords(finalTr)) {
-            modified = true
-          }
-
-          return modified ? finalTr : null
+          return tr
         },
       }),
     ]
