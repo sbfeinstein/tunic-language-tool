@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { INNER_LINE_IDS, LEGENDS, OUTER_LINE_IDS } from '@/constants/runes.js'
 import ClearIcon from './icons/IconClear.vue'
 import LegendIcon from '@/components/icons/IconLegend.vue'
@@ -9,13 +9,17 @@ import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vu
 import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
 import LetterImage from '@/components/LetterImage.vue'
 
-const props = defineProps({
-  inputRune: {
-    type: Object,
-    required: false,
-    default: null,
-  },
-})
+const handleSelectedRune = (inputRune) => {
+  switch (inputRune.type) {
+    case 'outer':
+      activateLines(OUTER_LINE_IDS, editorStore.dataRef.lines.outer, inputRune.lines)
+      break
+    case 'inner':
+      activateLines(INNER_LINE_IDS, editorStore.dataRef.lines.inner, inputRune.lines)
+      break
+  }
+}
+defineExpose({ handleSelectedRune })
 
 const editorStore = useEditorStore()
 const docStore = useDocumentStore()
@@ -55,24 +59,7 @@ const clearLines = () => {
   editorStore.dataRef.circle.active = false
 }
 
-watch(
-  () => props.inputRune,
-  (inputRune) => {
-    switch (props.inputRune.type) {
-      case 'outer':
-        activateLines(OUTER_LINE_IDS, editorStore.dataRef.lines.outer, inputRune.lines)
-        break
-      case 'inner':
-        activateLines(INNER_LINE_IDS, editorStore.dataRef.lines.inner, inputRune.lines)
-        break
-    }
-  },
-  {
-    deep: true,
-  },
-)
-
-const insertRune = () => {
+const handleInsertRune = () => {
   if (!editorStore.letterID) return
 
   docStore.editor
@@ -196,7 +183,7 @@ const validationMessage = computed(() => {
       </div>
       <div v-show="validationMessage" class="validation">{{ validationMessage }}</div>
       <LetterImage v-show="editorStore.letterID" :letterID="editorStore.letterID || ''" />
-      <input type="button" v-show="editorStore.letterID" value="insert" @click="insertRune" />
+      <input type="button" v-show="editorStore.letterID" value="insert" @click="handleInsertRune" />
     </div>
   </div>
 </template>
@@ -355,6 +342,6 @@ const validationMessage = computed(() => {
 }
 
 .letter-image-container {
-  padding-top: 15px;
+  padding-top: 1em;
 }
 </style>

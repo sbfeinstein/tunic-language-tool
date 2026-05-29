@@ -6,10 +6,10 @@ import LetterEditor from '@/components/LetterEditor.vue'
 import { ref } from 'vue'
 import DocumentEditor from '@/components/DocumentEditor.vue'
 
-const selectedRune = ref(null)
+const letterEditorRef = ref(null)
 
 const handleSelectedRune = (rune) => {
-  selectedRune.value = rune
+  letterEditorRef.value?.handleSelectedRune(rune)
 }
 </script>
 
@@ -18,7 +18,7 @@ const handleSelectedRune = (rune) => {
     <template #left>
       <HorizontalSplitter top-initial-height="65%">
         <template #top><RuneKeyboard @runeSelected="handleSelectedRune" /></template>
-        <template #bottom><LetterEditor :input-rune="selectedRune" /></template>
+        <template #bottom><LetterEditor ref="letterEditorRef" /></template>
       </HorizontalSplitter>
     </template>
     <template #right><DocumentEditor class="editor" /></template>
