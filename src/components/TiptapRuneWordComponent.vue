@@ -7,7 +7,7 @@ const props = defineProps(nodeViewProps)
 
 const letters = computed(() => {
   const ids = []
-  props.node.content.forEach((node) => {
+  props.node.children.forEach((node) => {
     if (node.type.name === 'runeLetter') {
       const letterID = node.attrs.letterID
       ids.push({
@@ -29,7 +29,7 @@ const baseId = useId()
     <span class="letters-container">
       <node-view-content />
     </span>
-    <span class="translation-placeholder">
+    <span class="translation">
       <span v-for="letter in letters" :key="`${baseId}-${letter.id}-for`">
         <EditorSelectionTranslationText
           position="first"
@@ -72,11 +72,12 @@ const baseId = useId()
   align-items: center;
 }
 
-.translation-placeholder {
+.translation {
   font-size: 0.8em;
-  color: var(--color-outer-inner-active);
+  color: var(--color-outer-inner);
   text-align: center;
-  margin-top: -4px;
+  margin-top: -0.5em; /** hack until we fix SVGs to reduce bottom whitespace */
+  margin-bottom: 0.5em;
   font-family: sans-serif;
   letter-spacing: 0.1em;
 }

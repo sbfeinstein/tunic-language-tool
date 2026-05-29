@@ -5,9 +5,8 @@ import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { UndoRedo } from '@tiptap/extensions'
-import VueComponent from '@/components/TiptapLetterExtension.js'
-import RuneWord from '@/components/TiptapRuneWordExtension.js'
-import TiptapMergeAndSplitExtension from '@/components/TiptapMergeAndSplitExtension.js'
+import TiptapLetterExtension from '@/components/TiptapLetterExtension.js'
+import TiptapRuneWordExtension from '@/components/TiptapRuneWordExtension.js'
 
 export const useDocumentStore = defineStore('document', () => {
   const editor = useEditor({
@@ -17,9 +16,8 @@ export const useDocumentStore = defineStore('document', () => {
       Paragraph,
       Text,
       UndoRedo,
-      VueComponent,
-      RuneWord,
-      TiptapMergeAndSplitExtension,
+      TiptapLetterExtension,
+      TiptapRuneWordExtension,
     ],
   })
 
