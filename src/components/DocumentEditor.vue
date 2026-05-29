@@ -2,30 +2,15 @@
 import { EditorContent } from '@tiptap/vue-3'
 import { useDocumentStore } from '@/stores/documentStore.js'
 import { computed } from 'vue'
+import DocumentMenubar from '@/components/DocumentMenubar.vue'
 
 const docStore = useDocumentStore()
 const editor = computed(() => docStore.editor)
-
-const exportDocument = () => {
-  const content = JSON.stringify(editor.value.getJSON())
-
-  const filename = 'tunic-language-tool.json'
-  const element = document.createElement('a')
-  element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(content))
-  element.setAttribute('download', filename)
-  element.style.display = 'none'
-  document.body.appendChild(element)
-
-  element.click()
-  document.body.removeChild(element)
-}
 </script>
 
 <template>
   <div class="editor-wrapper">
-    <div class="menubar">
-      <input type="button" value="export" @click="exportDocument()" />
-    </div>
+    <DocumentMenubar />
     <div class="editor-area">
       <editor-content :editor="editor" />
     </div>
@@ -37,11 +22,6 @@ const exportDocument = () => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.menubar {
-  padding: 5px;
-  flex-shrink: 0; /* Prevent shrinking below content size */
 }
 
 .editor-area {
