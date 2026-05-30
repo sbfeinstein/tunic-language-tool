@@ -61,9 +61,6 @@ const translationRef = (() => {
 
 const translationClass = computed(() => {
   let cls = 'translation'
-  if (translationRef?.translation?.trim()) {
-    cls += ' known-translation'
-  }
   if (translationRef?.emphasized) {
     cls += ' emphasized'
   }
@@ -166,15 +163,10 @@ const translationClass = computed(() => {
 .translation {
   width: 2.1em;
   box-sizing: border-box;
-  color: var(--tlt-c-gray);
 }
 
 .translation.emphasized {
   font-weight: bold;
-}
-
-.card.inner .known-translation {
-  color: var(--color-inner-rune-line-active);
 }
 
 .card.outer .known-translation {
@@ -208,6 +200,10 @@ const translationClass = computed(() => {
   background-color: var(--color-outer-runes-active);
 }
 
+.card.outer .translation {
+  background-color: var(--color-outer-rune-line-inactive);
+}
+
 /* Card - Inner Rune Styling
    ========================================================================== */
 
@@ -233,5 +229,9 @@ const translationClass = computed(() => {
 
 .card.inner:active {
   background-color: var(--color-inner-runes-active);
+}
+
+.card.inner .translation {
+  background-color: var(--color-inner-rune-line-inactive);
 }
 </style>
