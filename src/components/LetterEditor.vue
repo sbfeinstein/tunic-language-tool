@@ -6,7 +6,7 @@ import LegendIcon from '@/components/icons/IconLegend.vue'
 import { useEditorStore } from '@/stores/editorStore.js'
 import { useDocumentStore } from '@/stores/documentStore.js'
 import EditorSelectionStatusCard from '@/components/EditorSelectionStatusCard.vue'
-import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
+import TranslationText from '@/components/TranslationText.vue'
 import LetterImage from '@/components/LetterImage.vue'
 
 const handleSelectedRune = (inputRune) => {
@@ -167,13 +167,13 @@ const validationMessage = computed(() => {
         <EditorSelectionStatusCard position="second" />
         <span class="operator" v-show="editorStore.validForTranslation">=</span>
         <div class="translation" v-show="editorStore.validForTranslation">
-          <EditorSelectionTranslationText
+          <TranslationText
             position="first"
             :outerRuneID="editorStore.outerRuneMatch?.id"
             :innerRuneID="editorStore.innerRuneMatch?.id"
             :circleActive="editorStore.circleActive"
           />
-          <EditorSelectionTranslationText
+          <TranslationText
             position="second"
             :outerRuneID="editorStore.outerRuneMatch?.id"
             :innerRuneID="editorStore.innerRuneMatch?.id"

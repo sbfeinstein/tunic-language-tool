@@ -3,109 +3,109 @@
     {
       "id": "01",
       "type": "outer",
-      "translation": ["a"],
+      "translation": "a",
       "emphasized": false
     },
     {
       "id": "02",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "03",
       "type": "outer",
-      "translation": ["e"],
+      "translation": "e",
       "emphasized": true
     },
     {
       "id": "04",
       "type": "outer",
-      "translation": ["oo"],
+      "translation": "oo",
       "emphasized": false
     },
     {
       "id": "05",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "06",
       "type": "outer",
-      "translation": ["u"],
+      "translation": "u",
       "emphasized": false
     },
     {
       "id": "07",
       "type": "outer",
-      "translation": ["E"],
+      "translation": "E",
       "emphasized": false
     },
     {
       "id": "08",
       "type": "outer",
-      "translation": ["oo"],
+      "translation": "oo",
       "emphasized": false
     },
     {
       "id": "09",
       "type": "outer",
-      "translation": ["y"],
+      "translation": "y",
       "emphasized": false
     },
     {
       "id": "10",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "11",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "12",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "13",
       "type": "outer",
-      "translation": ["A"],
+      "translation": "A",
       "emphasized": false
     },
     {
       "id": "14",
       "type": "outer",
-      "translation": ["i"],
+      "translation": "i",
       "emphasized": false
     },
     {
       "id": "15",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "16",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "17",
       "type": "outer",
-      "translation": ["o"],
+      "translation": "o",
       "emphasized": false
     },
     {
       "id": "18",
       "type": "outer",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     }
   ],
@@ -113,145 +113,145 @@
     {
       "id": "01",
       "type": "inner",
-      "translation": ["m"],
+      "translation": "m",
       "emphasized": false
     },
     {
       "id": "02",
       "type": "inner",
-      "translation": ["n"],
+      "translation": "n",
       "emphasized": false
     },
     {
       "id": "03",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "04",
       "type": "inner",
-      "translation": ["p"],
+      "translation": "p",
       "emphasized": false
     },
     {
       "id": "05",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "06",
       "type": "inner",
-      "translation": ["t"],
+      "translation": "t",
       "emphasized": false
     },
     {
       "id": "07",
       "type": "inner",
-      "translation": ["d"],
+      "translation": "d",
       "emphasized": false
     },
     {
       "id": "08",
       "type": "inner",
-      "translation": ["k"],
+      "translation": "k",
       "emphasized": false
     },
     {
       "id": "09",
       "type": "inner",
-      "translation": ["g"],
+      "translation": "g",
       "emphasized": false
     },
     {
       "id": "10",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "11",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "12",
       "type": "inner",
-      "translation": ["f"],
+      "translation": "f",
       "emphasized": false
     },
     {
       "id": "13",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "14",
       "type": "inner",
-      "translation": ["th"],
+      "translation": "th",
       "emphasized": false
     },
     {
       "id": "15",
       "type": "inner",
-      "translation": ["TH"],
+      "translation": "TH",
       "emphasized": true
     },
     {
       "id": "16",
       "type": "inner",
-      "translation": ["S"],
+      "translation": "S",
       "emphasized": false
     },
     {
       "id": "17",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "18",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "19",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "20",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "21",
       "type": "inner",
-      "translation": ["r"],
+      "translation": "r",
       "emphasized": false
     },
     {
       "id": "22",
       "type": "inner",
-      "translation": [],
+      "translation": null,
       "emphasized": false
     },
     {
       "id": "23",
       "type": "inner",
-      "translation": ["W"],
+      "translation": "W",
       "emphasized": false
     },
     {
       "id": "24",
       "type": "inner",
-      "translation": ["l"],
+      "translation": "l",
       "emphasized": false
     }
   ]

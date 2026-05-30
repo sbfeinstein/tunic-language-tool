@@ -52,28 +52,19 @@ const matchesEditorClass = computed(() => {
   return ''
 })
 
-const translationData = computed(() => {
+const translationRef = (() => {
   if (props.rune.type === 'outer') {
     return translationStore.outer[props.rune.id]
   }
-
-  if (props.rune.type === 'inner') {
-    return translationStore.inner[props.rune.id]
-  }
-
-  return null
-})
-
-const translationText = computed(() => {
-  return translationData.value.translation.join('\n') || '?'
-})
+  return translationStore.inner[props.rune.id]
+})()
 
 const translationClass = computed(() => {
   let cls = 'translation'
-  if (translationText.value !== '?') {
+  if (translationRef?.translation?.trim()) {
     cls += ' known-translation'
   }
-  if (translationData.value.emphasized) {
+  if (translationRef?.emphasized) {
     cls += ' emphasized'
   }
   return cls
@@ -105,7 +96,12 @@ const translationClass = computed(() => {
         ></line>
       </g>
     </svg>
-    <span :class="translationClass">{{ translationText }}</span>
+    <input
+      type="text"
+      maxlength="2"
+      v-model="translationRef['translation']"
+      :class="translationClass"
+    />
   </div>
 </template>
 
@@ -168,7 +164,8 @@ const translationClass = computed(() => {
 }
 
 .translation {
-  padding-right: 1em;
+  width: 2.1em;
+  box-sizing: border-box;
   color: var(--tlt-c-gray);
 }
 

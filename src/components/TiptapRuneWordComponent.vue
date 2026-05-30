@@ -1,7 +1,7 @@
 <script setup>
 import { computed, useId } from 'vue'
 import { nodeViewProps, NodeViewContent, NodeViewWrapper } from '@tiptap/vue-3'
-import EditorSelectionTranslationText from '@/components/EditorSelectionTranslationText.vue'
+import TranslationText from '@/components/TranslationText.vue'
 
 const props = defineProps(nodeViewProps)
 
@@ -31,14 +31,14 @@ const baseId = useId()
     </span>
     <span class="translation">
       <span v-for="letter in letters" :key="`${baseId}-${letter.id}-for`">
-        <EditorSelectionTranslationText
+        <TranslationText
           position="first"
           :innerRuneID="letter.innerRuneID"
           :outerRuneID="letter.outerRuneID"
           :circleActive="letter.circleActive"
           :key="`${baseId}-${letter.id}-first`"
         />
-        <EditorSelectionTranslationText
+        <TranslationText
           position="second"
           :innerRuneID="letter.innerRuneID"
           :outerRuneID="letter.outerRuneID"

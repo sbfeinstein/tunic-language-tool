@@ -43,8 +43,8 @@ const translation = computed(() => {
     type,
     id: runeID,
     notEmpty: runeID !== '00',
-    text: store[runeID]?.translation?.join('') || '?',
-    cssClass: store[runeID]?.translation?.length > 0 ? 'tooltip' : 'tooltip -unknown',
+    text: store[runeID]?.translation || '?',
+    cssClass: store[runeID]?.translation ? 'tooltip' : 'tooltip -unknown',
   }
 })
 </script>

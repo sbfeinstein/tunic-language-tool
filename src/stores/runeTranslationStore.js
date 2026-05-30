@@ -1,15 +1,17 @@
-import { computed } from 'vue'
+import { reactive } from 'vue'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import DEFAULT_RUNE_TRANSLATIONS from '@/assets/defaultRuneTranslations.json'
 
 export const useRuneTranslationStore = defineStore('rune-translation', () => {
-  const outer = computed(() => {
-    return Object.fromEntries(DEFAULT_RUNE_TRANSLATIONS.outerRunes.map((data) => [data.id, data]))
-  })
+  const outerRuneTranslations = Object.fromEntries(
+    DEFAULT_RUNE_TRANSLATIONS.outerRunes.map((data) => [data.id, data]),
+  )
+  const outer = reactive(outerRuneTranslations)
 
-  const inner = computed(() => {
-    return Object.fromEntries(DEFAULT_RUNE_TRANSLATIONS.innerRunes.map((data) => [data.id, data]))
-  })
+  const innerRuneTranslations = Object.fromEntries(
+    DEFAULT_RUNE_TRANSLATIONS.innerRunes.map((data) => [data.id, data]),
+  )
+  const inner = reactive(innerRuneTranslations)
 
   return { outer, inner }
 })
