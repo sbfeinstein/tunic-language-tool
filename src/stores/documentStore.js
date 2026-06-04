@@ -38,7 +38,7 @@ export const useDocumentStore = defineStore('document', () => {
     loadContent(DEFAULT_DOCUMENT)
   }
 
-  const loadContentFromFileSystem = async (handle) => {
+  const loadFromFileSystem = async (handle) => {
     const file = await handle.getFile()
     const json = JSON.parse(await file.text())
     fileHandle.value = handle
@@ -77,10 +77,12 @@ export const useDocumentStore = defineStore('document', () => {
     isDirty,
     currentFilename,
     fileHandle,
-    newDocument,
-    loadContentFromFileSystem,
-    loadContent,
-    saveContent,
     contentAsJSON,
+    ops: {
+      new: newDocument,
+      loadFromFileSystem,
+      load: loadContent,
+      save: saveContent,
+    },
   }
 })

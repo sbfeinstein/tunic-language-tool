@@ -16,7 +16,7 @@ const confirmDiscard = () =>
 
 const newDocument = () => {
   if (!confirmDiscard()) return
-  docStore.newDocument()
+  docStore.ops.new()
 }
 
 const openViaFilePicker = async () => {
@@ -30,7 +30,7 @@ const openViaFilePicker = async () => {
     if (error.name === 'AbortError') return // user canceled the dialog
     throw error
   }
-  await docStore.loadContentFromFileSystem(handle)
+  await docStore.ops.loadFromFileSystem(handle)
 }
 
 const openViaInput = () => {
@@ -44,7 +44,7 @@ const openViaInput = () => {
     if (!file) return
     try {
       const json = JSON.parse(await file.text())
-      docStore.loadContent(json, file.name)
+      docStore.ops.load(json, file.name)
     } catch {
       window.alert('Could not open file: it is not a valid document.')
     }
@@ -82,26 +82,26 @@ const downloadDocument = (content, fileName) => {
 const saveDocument = async () => {
   if (!docStore.editor) return
 
-  if (supportsFileSystemAccess()) {
-    try {
-      // No bound file yet (fresh / "new" document) → prompt for a destination.
-      let fileHandle = docStore.fileHandle
-      if (!fileHandle) {
-        fileHandle = await window.showSaveFilePicker({
-          suggestedName: docStore.currentFilename || DEFAULT_FILENAME,
-          types: FILE_PICKER_TYPES,
-        })
-      }
-      await docStore.saveContent(fileHandle)
-    } catch (error) {
-      if (error.name === 'AbortError') return // user canceled; keep dirty state
-      window.alert('Could not save file.')
-    }
+  if (!supportsFileSystemAccess()) {
+    const fileName = docStore.currentFilename || DEFAULT_FILENAME
+    downloadDocument(docStore.contentAsJSON(), fileName)
+    docStore.isDirty = false
+    return
   }
 
-  const fileName = docStore.currentFilename || DEFAULT_FILENAME
-  downloadDocument(docStore.contentAsJSON(), fileName)
-  docStore.isDirty = false
+  try {
+    let fileHandle = docStore.fileHandle
+    if (!fileHandle) {
+      fileHandle = await window.showSaveFilePicker({
+        suggestedName: docStore.currentFilename || DEFAULT_FILENAME,
+        types: FILE_PICKER_TYPES,
+      })
+    }
+    await docStore.ops.save(fileHandle)
+  } catch (error) {
+    if (error.name === 'AbortError') return // user canceled; keep dirty state
+    window.alert('Could not save file.')
+  }
 }
 </script>
 
