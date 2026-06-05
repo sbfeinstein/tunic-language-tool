@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { useEditor } from '@tiptap/vue-3'
 import DEFAULT_DOCUMENT from '@/assets/defaultDocument.json'
+import DEFAULT_RUNE_TRANSLATIONS from '@/assets/defaultRuneTranslations.json'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
@@ -8,10 +9,13 @@ import { UndoRedo } from '@tiptap/extensions'
 import TiptapLetterExtension from '@/components/TiptapLetterExtension.js'
 import TiptapRuneWordExtension from '@/components/TiptapRuneWordExtension.js'
 import { ref } from 'vue'
+import { VERSIONS } from '@/constants/documents.js'
+import { isObject } from '@/utils/jsonUtils.js'
+import { useRuneTranslationStore } from '@/stores/runeTranslationStore.js'
 
 export const useDocumentStore = defineStore('document', () => {
   const editor = useEditor({
-    content: DEFAULT_DOCUMENT,
+    content: DEFAULT_DOCUMENT.document,
     extensions: [
       Document,
       Paragraph,
@@ -28,6 +32,8 @@ export const useDocumentStore = defineStore('document', () => {
     },
   })
 
+  const translationsStore = useRuneTranslationStore()
+
   const isDirty = ref(false)
 
   const currentFilename = ref(null)
@@ -35,24 +41,87 @@ export const useDocumentStore = defineStore('document', () => {
 
   const newDocument = () => {
     fileHandle.value = null
-    loadContent(DEFAULT_DOCUMENT)
+    return loadContent({ ...DEFAULT_DOCUMENT, translations: DEFAULT_RUNE_TRANSLATIONS })
   }
 
   const loadFromFileSystem = async (handle) => {
     const file = await handle.getFile()
-    const json = JSON.parse(await file.text())
     fileHandle.value = handle
-    loadContent(json, file.name)
+    return loadContent(await file.text(), file.name)
   }
 
   const loadContent = (content, filename) => {
-    if (!editor) return
+    if (!editor) {
+      return {
+        loaded: false,
+        message: 'Editor is not initialized',
+      }
+    }
+
+    let json = content
+    if (!isObject(json)) {
+      try {
+        json = JSON.parse(content)
+      } catch (e) {
+        return {
+          loaded: false,
+          message: 'Invalid file, not in Tunic Language Tool format',
+        }
+      }
+    }
+
+    if (!isObject(json)) {
+      return {
+        loaded: false,
+        message: 'Invalid file, not in Tunic Language Tool format',
+      }
+    }
+
+    const metadata = json.metadata
+
+    if (
+      !metadata ||
+      !VERSIONS[metadata.version] ||
+      metadata.type !== VERSIONS[metadata.version].type
+    ) {
+      return {
+        loaded: false,
+        message: 'Invalid file, not in Tunic Language Tool format',
+      }
+    }
+
+    try {
+      editor.value.commands.setContent(json.document, { emitUpdate: false })
+      translationsStore.loadRuneTranslations(json.translations)
+    } catch (e) {
+      return {
+        loaded: false,
+        message: 'Error loading file',
+      }
+    }
+
     currentFilename.value = filename
-    editor.value.commands.setContent(content, { emitUpdate: false })
     isDirty.value = false
+
+    return {
+      loaded: true,
+      message: null,
+    }
   }
 
-  const contentAsJSON = () => JSON.stringify(editor.value.getJSON())
+  const contentAsJSON = () => {
+    const outerRunes = Object.values(translationsStore.outer)
+    const innerRunes = Object.values(translationsStore.inner)
+    const content = {
+      ...DEFAULT_DOCUMENT,
+      document: editor.value.getJSON(),
+      translations: {
+        outerRunes,
+        innerRunes,
+      },
+    }
+    return JSON.stringify(content)
+  }
 
   const saveContent = async (newFileHandle) => {
     if (!editor) {
@@ -67,7 +136,8 @@ export const useDocumentStore = defineStore('document', () => {
     }
 
     const writable = await fileHandle.value.createWritable()
-    await writable.write(contentAsJSON())
+    const data = contentAsJSON()
+    await writable.write(data)
     await writable.close()
     isDirty.value = false
   }

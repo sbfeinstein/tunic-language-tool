@@ -1,8 +1,9 @@
 <script setup>
-import { computed, useId } from 'vue'
+import { computed, useId, watch } from 'vue'
 import RuneIDCaption from '@/components/RuneIDCaption.vue'
 import { useRuneTranslationStore } from '@/stores/runeTranslationStore.js'
 import { useEditorStore } from '@/stores/editorStore.js'
+import { useDocumentStore } from '@/stores/documentStore.js'
 
 const props = defineProps({
   rune: {
@@ -13,6 +14,7 @@ const props = defineProps({
 
 const translationStore = useRuneTranslationStore()
 const editorStore = useEditorStore()
+const documentStore = useDocumentStore()
 
 /**
  * All possible lines in a Rune shape, including outer and inner runes.
@@ -52,16 +54,16 @@ const matchesEditorClass = computed(() => {
   return ''
 })
 
-const translationRef = (() => {
+const translationRef = computed(() => {
   if (props.rune.type === 'outer') {
     return translationStore.outer[props.rune.id]
   }
   return translationStore.inner[props.rune.id]
-})()
+})
 
 const translationClass = computed(() => {
   let cls = 'translation'
-  if (translationRef?.emphasized) {
+  if (translationRef.value.emphasized) {
     cls += ' emphasized'
   }
   return cls
@@ -98,6 +100,7 @@ const translationClass = computed(() => {
       maxlength="2"
       v-model="translationRef['translation']"
       :class="translationClass"
+      @change="documentStore.isDirty = true"
     />
   </div>
 </template>

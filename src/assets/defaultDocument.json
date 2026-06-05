@@ -1,54 +1,61 @@
 {
-  "type": "doc",
-  "content": [
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "This is your editable Tunic Language Tool document!"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "runeWord",
-          "content": [
-            {
-              "type": "runeLetter",
-              "attrs": {
-                "letterID": "20160"
+  "metadata": {
+    "type": "Tunic Language Tool Document",
+    "url": "https://github.com/sbfeinstein/tunic-language-tool",
+    "version": "0.9.0"
+  },
+  "document": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This is your editable Tunic Language Tool document!"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "runeWord",
+            "content": [
+              {
+                "type": "runeLetter",
+                "attrs": {
+                  "letterID": "20160"
+                }
+              },
+              {
+                "type": "runeLetter",
+                "attrs": {
+                  "letterID": "07080"
+                }
+              },
+              {
+                "type": "runeLetter",
+                "attrs": {
+                  "letterID": "00140"
+                }
+              },
+              {
+                "type": "runeLetter",
+                "attrs": {
+                  "letterID": "06000"
+                }
+              },
+              {
+                "type": "runeLetter",
+                "attrs": {
+                  "letterID": "15060"
+                }
               }
-            },
-            {
-              "type": "runeLetter",
-              "attrs": {
-                "letterID": "07080"
-              }
-            },
-            {
-              "type": "runeLetter",
-              "attrs": {
-                "letterID": "00140"
-              }
-            },
-            {
-              "type": "runeLetter",
-              "attrs": {
-                "letterID": "06000"
-              }
-            },
-            {
-              "type": "runeLetter",
-              "attrs": {
-                "letterID": "15060"
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

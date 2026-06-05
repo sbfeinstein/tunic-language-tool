@@ -1,23 +1,20 @@
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import DEFAULT_RUNE_TRANSLATIONS from '@/assets/defaultRuneTranslations.json'
 
 export const useRuneTranslationStore = defineStore('rune-translation', () => {
-  const outerRuneTranslations = Object.fromEntries(
-    DEFAULT_RUNE_TRANSLATIONS.outerRunes.map((data) => [data.id, data]),
-  )
-  const outer = reactive(outerRuneTranslations)
+  const _mapRuneTranslations = (translations) =>
+    Object.fromEntries(translations.map((data) => [String(data.id), data]))
 
-  const innerRuneTranslations = Object.fromEntries(
-    DEFAULT_RUNE_TRANSLATIONS.innerRunes.map((data) => [data.id, data]),
-  )
-  const inner = reactive(innerRuneTranslations)
+  const loadRuneTranslations = (translations) => {
+    outer.value = _mapRuneTranslations(structuredClone(translations.outerRunes))
+    inner.value = _mapRuneTranslations(structuredClone(translations.innerRunes))
+  }
 
-  return { outer, inner }
+  const outer = ref({})
+  const inner = ref({})
+
+  loadRuneTranslations(DEFAULT_RUNE_TRANSLATIONS)
+
+  return { outer, inner, loadRuneTranslations }
 })
-
-// Have Vite rebuild the store if it is updated, including due to edits to the JSON file
-// https://pinia.vuejs.org/api/pinia/functions/acceptHMRUpdate.html#hot
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useRuneTranslationStore, import.meta.hot))
-}
