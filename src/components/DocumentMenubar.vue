@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useDocumentStore } from '@/stores/documentStore.js'
 import { DEFAULT_FILENAME, FILE_PICKER_TYPES } from '@/constants/documents.js'
 import { supportsFileSystemAccess } from '@/utils/systemUtils.js'
@@ -90,6 +90,8 @@ const downloadDocument = (content, fileName) => {
   URL.revokeObjectURL(url)
 }
 
+const saveLabel = computed(() => (supportsFileSystemAccess() ? 'save' : 'download'))
+
 const saveDocument = async () => {
   if (!docStore.editor) return
 
@@ -120,7 +122,7 @@ const saveDocument = async () => {
   <div class="menubar">
     <input type="button" value="new" @click="newDocument()" />
     <input type="button" value="open" @click="openDocument()" />
-    <input type="button" value="save" @click="saveDocument()" />
+    <input type="button" :value="saveLabel" @click="saveDocument()" />
     <span class="filename">{{ fileLabel }}</span>
   </div>
 </template>
