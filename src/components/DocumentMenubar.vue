@@ -55,7 +55,7 @@ const openViaInput = () => {
     if (!file) {
       return
     }
-    const loadResults = docStore.ops.load(file.text(), file.name)
+    const loadResults = docStore.ops.load(await file.text(), file.name)
     if (!loadResults.loaded) {
       window.alert(loadResults.message)
     }
@@ -94,8 +94,8 @@ const saveDocument = async () => {
   if (!docStore.editor) return
 
   if (!supportsFileSystemAccess()) {
-    const fileName = currentFilename || DEFAULT_FILENAME
-    downloadDocument(docStore.contentAsJSON(), fileName)
+    currentFilename.value = currentFilename.value || DEFAULT_FILENAME
+    downloadDocument(docStore.contentAsJSON(), currentFilename.value)
     isDirty.value = false
     return
   }

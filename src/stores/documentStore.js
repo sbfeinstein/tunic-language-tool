@@ -47,7 +47,8 @@ export const useDocumentStore = defineStore('document', () => {
   const loadFromFileSystem = async (handle) => {
     const file = await handle.getFile()
     fileHandle.value = handle
-    return loadContent(await file.text(), file.name)
+    const content = await file.text()
+    return loadContent(content, file.name)
   }
 
   const loadContent = (content, filename) => {
