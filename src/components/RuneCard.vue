@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useId, watch } from 'vue'
+import { computed, useId } from 'vue'
 import RuneIDCaption from '@/components/RuneIDCaption.vue'
 import { useRuneTranslationStore } from '@/stores/runeTranslationStore.js'
 import { useEditorStore } from '@/stores/editorStore.js'
@@ -97,7 +97,7 @@ const translationClass = computed(() => {
     </svg>
     <input
       type="text"
-      maxlength="2"
+      maxlength="3"
       v-model="translationRef['translation']"
       :class="translationClass"
       @change="documentStore.isDirty = true"
@@ -164,7 +164,7 @@ const translationClass = computed(() => {
 }
 
 .translation {
-  width: 2.1em;
+  width: 2.9em;
   box-sizing: border-box;
 }
 
