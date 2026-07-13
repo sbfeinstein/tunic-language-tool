@@ -1,3 +1,4 @@
+import 'prosemirror-view/style/prosemirror.css'
 import './assets/tunic.css'
 
 import { createApp } from 'vue'

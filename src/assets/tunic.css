@@ -81,4 +81,7 @@ body {
   width: 100vw;
 }
 
-
+/* Ensure cursor is visible inside ProseMirror */
+.ProseMirror {
+  caret-color: black;
+}
