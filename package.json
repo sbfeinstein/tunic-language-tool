@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "deploy": "scripts/deploy.sh",
     "dev": "vite",
     "format": "prettier --write --experimental-cli src/",
     "generate:letters": "vite-node scripts/generate_letter_svgs.js",

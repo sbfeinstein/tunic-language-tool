@@ -15,6 +15,7 @@ export default defineConfig({
     }),
   ],
   resolve: {
+    base: '/tunic-language-tool/',
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
