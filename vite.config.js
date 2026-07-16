@@ -7,6 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/tunic-language-tool/',
   plugins: [
     vue(),
     vueJsx(),
@@ -15,7 +16,6 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    base: '/tunic-language-tool/',
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },

@@ -4,6 +4,7 @@
 set -e
 
 # Build
+rm -rf dist
 npm run build
 
 # Navigate to build output
