@@ -1,4 +1,8 @@
 # Tunic Language Tool
+
+[![GitHub Pages Deployment](https://github.com/sbfeinstein/tunic-language-tool/actions/workflows/pages/pages-build-deployment/badge.svg)](https://sbfeinstein.github.io/tunic-language-tool/)
+[![Website](https://img.shields.io/badge/website-live-blue.svg)](https://sbfeinstein.github.io/tunic-language-tool/)
+
 This is a fan-created project for the game [TUNIC](https://tunicgame.com/).
 
 It is a tool to help with solving the mystery of the in-game runic language.
