@@ -2,6 +2,7 @@
 
 [![GitHub Pages Deployment](https://github.com/sbfeinstein/tunic-language-tool/actions/workflows/pages/pages-build-deployment/badge.svg)](https://sbfeinstein.github.io/tunic-language-tool/)
 [![Website](https://img.shields.io/badge/website-live-blue.svg)](https://sbfeinstein.github.io/tunic-language-tool/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This is a fan-created project for the game [TUNIC](https://tunicgame.com/).
 
@@ -59,3 +60,6 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
