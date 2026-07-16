@@ -5,20 +5,15 @@ import { computed } from 'vue'
 
 const props = defineProps(nodeViewProps)
 
-const cursorPosition = computed(() => {
+const showCursorIndicator = computed(() => {
   const { from, to } = props.editor.state.selection
   const nodeStart = props.getPos()
 
   // Only show cursor for single position (not a selection)
-  if (from !== to) return null
-
-  // Cursor before this node (left edge)
-  if (from === nodeStart) return 'left'
+  if (from !== to) return false
 
   // Cursor after this node (right edge) - atomic nodes take 1 position
-  if (from === nodeStart + 1) return 'right'
-
-  return null
+  return from === nodeStart + 1;
 })
 
 const handleClick = (event) => {
@@ -33,8 +28,7 @@ const handleClick = (event) => {
   <node-view-wrapper class="rune-letter" contenteditable="false" @click="handleClick">
     <LetterImage :letterID="props.node.attrs.letterID" />
     <span class="selection-helper">a</span>
-    <span v-if="cursorPosition === 'left'" class="cursor-indicator cursor-left"></span>
-    <span v-if="cursorPosition === 'right'" class="cursor-indicator cursor-right"></span>
+    <span v-if="showCursorIndicator" class="cursor-indicator cursor-right"></span>
   </node-view-wrapper>
 </template>
 
@@ -63,7 +57,7 @@ const handleClick = (event) => {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
+  width: 1px;
   background-color: black;
   animation: blink 1s infinite;
 }
