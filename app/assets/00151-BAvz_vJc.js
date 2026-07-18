@@ -1,0 +1,7 @@
+var e=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 165">
+    <g>
+        <line id="4" x1="8" y1="105" x2="50" y2="125"/>
+        <line id="13" x1="8" y1="70" x2="100" y2="70"/>
+        <circle cx="50" cy="140" r="10" fill="transparent"/>
+    </g>
+</svg>`;export{e as default};
