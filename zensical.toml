@@ -50,7 +50,7 @@ Copyright &copy; 2026 Scott Feinstein under <a href="/tunic-language-tool/LICENS
 nav = [
     "Overview.md",
     "Features.md",
-    {"Try it!" = "App.md"},
+    {"Try it!" = "TryIt.md"},
     {"Source" = "Repo.md"},
     "LICENSE.md",
 ]

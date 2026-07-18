@@ -8,7 +8,7 @@ set -e
 # Build
 
 echo "Building"
-APP_BASE_URL="https://sbfeinstein.github.iou" npm run build
+APP_BASE_URL="https://sbfeinstein.github.io" npm run build
 cd dist
 
 # Create .nojekyll to bypass Jekyll processing
