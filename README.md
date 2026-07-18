@@ -60,6 +60,33 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+## Prerequisites & Local Setup
+
+To run this project locally, you only need two system-level tools installed:
+
+1. **Node Version Manager**
+    * **macOS/Linux:** [nvm](https://github.com/nvm-sh/nvm)
+    * **Windows:** [nvm-windows](https://github.com/coreybutler/nvm-windows)
+2. **uv** (Fast Python package and environment manager)
+    * **macOS/Linux:** `curl -LsSf https://astral.sh/uv/install.sh | sh`
+    * **Windows:** `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`
+
+---
+
+### Initial Bootstrapping
+
+Once you have the prerequisites, run the following commands from the project root to set up your local environment:
+
+```bash
+# 1. Install and use the correct Node.js version
+nvm install
+nvm use
+
+# 2. Install frontend dependencies
+npm install
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
