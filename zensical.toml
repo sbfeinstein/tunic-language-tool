@@ -37,7 +37,7 @@ site_dir = "dist"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; 2026 Scott Feinstein under <a href="/LICENSE">LICENSE</a>
+Copyright &copy; 2026 Scott Feinstein under <a href="/tunic-language-tool/LICENSE">LICENSE</a>
 """
 
 # Zensical supports both implicit navigation and explicitly defined navigation.

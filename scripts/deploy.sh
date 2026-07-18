@@ -1,15 +1,14 @@
 #!/usr/bin/env sh
+# Typically this project is deployed automatically via GitHub Actions upon commits to main
+# This script provides an alternative in case it is necessary to force a deploy directly to the gh-pages branch.
 
 # Abort on errors
 set -e
 
 # Build
 
-echo "Removing old build output"
-rm -rf dist
-
 echo "Building"
-npm run build
+APP_BASE_URL="https://sbfeinstein.github.iou" npm run build
 cd dist
 
 # Create .nojekyll to bypass Jekyll processing
