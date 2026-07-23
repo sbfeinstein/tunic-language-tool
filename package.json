@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build:app": "vite build",
-    "build:docs": "uv run zensical build",
+    "build:docs": "uv run zensical build --clean",
     "build": "run-s clean build:docs build:app",
     "clean": "rm -rf dist",
     "deploy": "scripts/deploy.sh",
