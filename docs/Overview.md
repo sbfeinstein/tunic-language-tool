@@ -24,4 +24,4 @@ The app's main [features](Features.md) are:
 - In-line translations that update immediately when you edit your guesses
 - The ability so save your work to a downloadable file that you can re-open
 
-You can [use it online](App.md) for free with no ads, login or other annoyances!
+You can [use it online](TryIt.md) for free with no ads, login or other annoyances!
