@@ -49,9 +49,10 @@ Copyright &copy; 2026 Scott Feinstein under <a href="/tunic-language-tool/LICENS
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
     "Overview.md",
+    "Spoilers.md",
     "Features.md",
     {"Try it!" = "TryIt.md"},
-    {"Source" = "Repo.md"},
+    {"Tech" = "Tech.md"},
     "LICENSE.md",
 ]
 
