@@ -43,6 +43,6 @@ Play the game some more and come back to TLT later on.
 
     The circle symbol sometimes rendered beneath the runes reverses the order in which they are read.
 
-??? note "Spoiler finale - TLT screenshots!"
+??? note "Spoiler finale - TLT gallery!"
 
     ![Image](images//TLT-animated-demo-1.gif)
