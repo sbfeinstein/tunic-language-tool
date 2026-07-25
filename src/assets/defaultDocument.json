@@ -12,7 +12,7 @@
         "content": [{ "type": "text", "text": "Welcome to the Tunic Language Tool (TLT)!" }]
       },
       { "type": "paragraph" },
-      { "type": "paragraph", "content": [{ "type": "text", "text": "This is a new document." }] },
+      { "type": "paragraph", "content": [{ "type": "text", "text": "This is a new document. You can edit or delete all of it." }] },
       { "type": "paragraph" },
       {
         "type": "paragraph",
