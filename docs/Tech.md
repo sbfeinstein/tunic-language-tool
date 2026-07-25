@@ -21,11 +21,15 @@ The main technical dependencies are:
 
 ## Architecture
 
-TLT has no server-side or backend aspect!  It runs entirely in your browser.
+TLT is a Single Page Application (SPA) implemented primarily with VueJS.
 
-Additionally, it does not make use of any ads, authentication or tracking technologies!
+There are no back-end or server-side components, it runs entirely in the browser.
+Cookies and browser-local storage are not used.
 
-To allow users to work on their translations across sessions and preserve Tunic language documents long-term,
-TLT allows you to save and open document files (which are fundamentally in the JSON format).
+Additionally, TLT has **no ads**, **no authentication** and **no tracking**!
 
-The site and assets are hosted using [GitHub Pages](https://docs.github.com/en/pages).
+TLT *does* support saving your work to a local file on your own computer and opening it again later.
+This allows users to work on and keep a library of Tunic-language documents, not to mention solving the language 
+translation across multiple sessions.
+
+[GitHub Pages](https://docs.github.com/en/pages) is used for hosting.

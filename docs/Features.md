@@ -14,3 +14,4 @@ icon: lucide/sparkles
     - **In-line translations** for the runes in your document, based on your guesses
     - **Real-time updates** as you enter or update your translation guesses
     - **Save** and **Open** your documents, to preserve both your translation guesses and document content
+    - **Standard editing capabilities** like cut, copy and paste even for the rune symbols in your document

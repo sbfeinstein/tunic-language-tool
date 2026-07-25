@@ -53,6 +53,7 @@ nav = [
     "Features.md",
     {"Try it!" = "TryIt.md"},
     {"Tech" = "Tech.md"},
+    "About.md",
     "LICENSE.md",
 ]
 
