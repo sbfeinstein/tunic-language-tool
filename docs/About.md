@@ -39,6 +39,6 @@ So, mostly hand written code and this was a fun & educational project for me!
 ## Buy me a coffee
 
 If you enjoy TLT, find it useful or just want to support quirky development projects that are **ad free** and
-**subscription free**, you can [buy me a coffee](#){:target="_blank"}!
+**subscription free**, you can [buy me a coffee](https://buymeacoffee.com/sfeinstein){:target="_blank"}!
 
 Thank you for supporting indie developers!
