@@ -9,10 +9,95 @@
     "content": [
       {
         "type": "paragraph",
+        "content": [{ "type": "text", "text": "Welcome to the Tunic Language Tool (TLT)!" }]
+      },
+      { "type": "paragraph" },
+      { "type": "paragraph", "content": [{ "type": "text", "text": "This is a new document." }] },
+      { "type": "paragraph" },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "Here are some things to try!" }]
+      },
+      {
+        "type": "paragraph",
         "content": [
           {
             "type": "text",
-            "text": "This is your editable Tunic Language Tool document!"
+            "text": "- Click the Outer and Inner Runes on the left to construct a Tunic language character"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Click in this document where you want to insert the Tunic character and click the \"insert\" button on the left to add it to the document"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Observe the question marks underneath your Tunic character in the doc; this is the translation text.  Mousing over translation text shows you which Rune it is related to."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Click directly on the lines in the Tunic character editor on the lower left of the app; only valid characters can be inserted"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Enter text into the textboxes for the runes and observe how the translation of them in your document updates immediately"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Select parts of this document including Tunic characters by holding Shift while using the arrow keys (this is easier to control than the selecting via the mouse)."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "- Use cut / copy / paste your selections" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "- Use ctrl-Z or command-Z to undo edits" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "- Use the new / open / save buttons at the top to download your docs and re-open them.  These files include your translation guesses as well as the document contents. "
+          }
+        ]
+      },
+      { "type": "paragraph" },
+      { "type": "paragraph" },
+      { "type": "paragraph" },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Here are some random (meaningless) Tunic characters as an example:"
           }
         ]
       },
@@ -22,40 +107,70 @@
           {
             "type": "runeWord",
             "content": [
-              {
-                "type": "runeLetter",
-                "attrs": {
-                  "letterID": "20160"
-                }
-              },
-              {
-                "type": "runeLetter",
-                "attrs": {
-                  "letterID": "07080"
-                }
-              },
-              {
-                "type": "runeLetter",
-                "attrs": {
-                  "letterID": "00140"
-                }
-              },
-              {
-                "type": "runeLetter",
-                "attrs": {
-                  "letterID": "06000"
-                }
-              },
-              {
-                "type": "runeLetter",
-                "attrs": {
-                  "letterID": "15060"
-                }
-              }
+              { "type": "runeLetter", "attrs": { "letterID": "00080" } },
+              { "type": "runeLetter", "attrs": { "letterID": "20121" } },
+              { "type": "runeLetter", "attrs": { "letterID": "13071" } }
+            ]
+          },
+          { "type": "text", "text": " and then " },
+          {
+            "type": "runeWord",
+            "content": [
+              { "type": "runeLetter", "attrs": { "letterID": "04070" } },
+              { "type": "runeLetter", "attrs": { "letterID": "00060" } },
+              { "type": "runeLetter", "attrs": { "letterID": "00030" } }
             ]
           }
         ]
       }
+    ]
+  },
+  "translations": {
+    "outerRunes": [
+      { "id": "10", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "11", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "12", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "13", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "14", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "15", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "16", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "17", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "18", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "01", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "02", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "03", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "04", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "05", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "06", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "07", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "08", "type": "outer", "translation": null, "emphasized": false },
+      { "id": "09", "type": "outer", "translation": null, "emphasized": false }
+    ],
+    "innerRunes": [
+      { "id": "10", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "11", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "12", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "13", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "14", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "15", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "16", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "17", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "18", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "19", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "20", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "21", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "22", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "23", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "24", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "01", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "02", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "03", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "04", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "05", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "06", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "07", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "08", "type": "inner", "translation": null, "emphasized": false },
+      { "id": "09", "type": "inner", "translation": null, "emphasized": false }
     ]
   }
 }
