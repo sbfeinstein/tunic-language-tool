@@ -12,7 +12,12 @@
         "content": [{ "type": "text", "text": "Welcome to the Tunic Language Tool (TLT)!" }]
       },
       { "type": "paragraph" },
-      { "type": "paragraph", "content": [{ "type": "text", "text": "This is a new document. You can edit or delete all of it." }] },
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "This is a new document. You can edit or delete all of it." }
+        ]
+      },
       { "type": "paragraph" },
       {
         "type": "paragraph",
@@ -23,7 +28,7 @@
         "content": [
           {
             "type": "text",
-            "text": "- Click the Outer and Inner Runes on the left to construct a Tunic language character"
+            "text": "- Use the Rune keyboard on the left to construct and insert Tunic language characters into this document"
           }
         ]
       },
@@ -32,7 +37,7 @@
         "content": [
           {
             "type": "text",
-            "text": "- Click in this document where you want to insert the Tunic character and click the \"insert\" button on the left to add it to the document"
+            "text": "- Enter translation ideas into the Rune keyboard textboxes and see the doc update in realtime"
           }
         ]
       },
@@ -41,88 +46,104 @@
         "content": [
           {
             "type": "text",
-            "text": "- Observe the question marks underneath your Tunic character in the doc; this is the translation text.  Mousing over translation text shows you which Rune it is related to."
+            "text": "- Use standard editing techniques in this doc like selecting, copy, paste, delete, undo an redo! (arrow keys and shift works best for selecting Rune characters)"
           }
         ]
       },
       {
         "type": "paragraph",
         "content": [
-          {
-            "type": "text",
-            "text": "- Click directly on the lines in the Tunic character editor on the lower left of the app; only valid characters can be inserted"
-          }
+          { "type": "text", "text": "- Use the buttons up top to save and re-open your work" }
         ]
       },
-      {
-        "type": "paragraph",
-        "content": [
-          {
-            "type": "text",
-            "text": "- Enter text into the textboxes for the runes and observe how the translation of them in your document updates immediately"
-          }
-        ]
-      },
-      {
-        "type": "paragraph",
-        "content": [
-          {
-            "type": "text",
-            "text": "- Select parts of this document including Tunic characters by holding Shift while using the arrow keys (this is easier to control than the selecting via the mouse)."
-          }
-        ]
-      },
-      {
-        "type": "paragraph",
-        "content": [{ "type": "text", "text": "- Use cut / copy / paste your selections" }]
-      },
-      {
-        "type": "paragraph",
-        "content": [{ "type": "text", "text": "- Use ctrl-Z or command-Z to undo edits" }]
-      },
-      {
-        "type": "paragraph",
-        "content": [
-          {
-            "type": "text",
-            "text": "- Use the new / open / save buttons at the top to download your docs and re-open them.  These files include your translation guesses as well as the document contents. "
-          }
-        ]
-      },
-      { "type": "paragraph" },
-      { "type": "paragraph" },
       { "type": "paragraph" },
       {
         "type": "paragraph",
         "content": [
-          {
-            "type": "text",
-            "text": "Here are some random (meaningless) Tunic characters as an example:"
-          }
+          { "type": "text", "text": "Here's an example from the Tunic instruction manual" }
         ]
       },
+      { "type": "paragraph" },
+      { "type": "paragraph", "content": [{ "type": "text", "text": "Page 3 " }] },
+      { "type": "paragraph", "content": [{ "type": "text", "text": "Text lower right" }] },
       {
         "type": "paragraph",
         "content": [
           {
             "type": "runeWord",
+            "content": [{ "type": "runeLetter", "attrs": { "letterID": "17011" } }]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
+            "content": [{ "type": "runeLetter", "attrs": { "letterID": "17031" } }]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
             "content": [
-              { "type": "runeLetter", "attrs": { "letterID": "00080" } },
-              { "type": "runeLetter", "attrs": { "letterID": "20121" } },
-              { "type": "runeLetter", "attrs": { "letterID": "13071" } }
+              { "type": "runeLetter", "attrs": { "letterID": "22080" } },
+              { "type": "runeLetter", "attrs": { "letterID": "19080" } },
+              { "type": "runeLetter", "attrs": { "letterID": "24051" } }
             ]
           },
-          { "type": "text", "text": " and then " },
+          { "type": "text", "text": "," },
+          {
+            "type": "runeWord",
+            "content": [{ "type": "runeLetter", "attrs": { "letterID": "02011" } }]
+          },
+          { "type": "text", "text": " " },
           {
             "type": "runeWord",
             "content": [
-              { "type": "runeLetter", "attrs": { "letterID": "04070" } },
-              { "type": "runeLetter", "attrs": { "letterID": "00060" } },
-              { "type": "runeLetter", "attrs": { "letterID": "00030" } }
+              { "type": "runeLetter", "attrs": { "letterID": "24061" } },
+              { "type": "runeLetter", "attrs": { "letterID": "21081" } },
+              { "type": "runeLetter", "attrs": { "letterID": "03031" } }
+            ]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
+            "content": [
+              { "type": "runeLetter", "attrs": { "letterID": "24081" } },
+              { "type": "runeLetter", "attrs": { "letterID": "07000" } }
+            ]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
+            "content": [
+              { "type": "runeLetter", "attrs": { "letterID": "04160" } },
+              { "type": "runeLetter", "attrs": { "letterID": "00090" } }
+            ]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
+            "content": [
+              { "type": "runeLetter", "attrs": { "letterID": "23060" } },
+              { "type": "runeLetter", "attrs": { "letterID": "17000" } }
+            ]
+          },
+          { "type": "text", "text": " " },
+          {
+            "type": "runeWord",
+            "content": [
+              { "type": "runeLetter", "attrs": { "letterID": "07030" } },
+              { "type": "runeLetter", "attrs": { "letterID": "16000" } },
+              { "type": "runeLetter", "attrs": { "letterID": "08060" } },
+              { "type": "runeLetter", "attrs": { "letterID": "13090" } },
+              { "type": "runeLetter", "attrs": { "letterID": "07000" } }
             ]
           }
         ]
-      }
+      },
+      { "type": "paragraph" },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "I hope you find TLT useful and fun!" }]
+      },
+      { "type": "paragraph" }
     ]
   },
   "translations": {
