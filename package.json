@@ -28,6 +28,7 @@
     "@tiptap/pm": "^3.23.6",
     "@tiptap/vue-3": "^3.23.6",
     "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "^3.5.32"
   },
   "devDependencies": {
@@ -35,7 +36,7 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vitejs/plugin-vue-jsx": "^5.1.5",
     "@vitest/eslint-plugin": "^1.6.17",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.2.7",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-oxlint": "~1.60.0",

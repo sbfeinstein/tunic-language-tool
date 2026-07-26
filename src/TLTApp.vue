@@ -3,10 +3,19 @@ import VerticalSplitter from '@/components/VerticalSplitter.vue'
 import HorizontalSplitter from '@/components/HorizontalSplitter.vue'
 import RuneKeyboard from '@/components/RuneKeyboard.vue'
 import LetterEditor from '@/components/LetterEditor.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import DocumentEditor from '@/components/DocumentEditor.vue'
+import { useDocumentStore } from '@/stores/documentStore'
+import { useRuneTranslationStore } from '@/stores/runeTranslationStore'
 
 const letterEditorRef = ref(null)
+const documentStore = useDocumentStore()
+const translationStore = useRuneTranslationStore()
+
+onMounted(() => {
+  translationStore.restoreFromSessionStorage()
+  documentStore.restoreFromSessionStorage()
+})
 
 const handleSelectedRune = (rune) => {
   letterEditorRef.value?.handleSelectedRune(rune)
