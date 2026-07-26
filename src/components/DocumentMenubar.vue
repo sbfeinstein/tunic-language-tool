@@ -4,6 +4,7 @@ import { useDocumentStore } from '@/stores/documentStore.js'
 import { DEFAULT_FILENAME, FILE_PICKER_TYPES } from '@/constants/documents.js'
 import { supportsFileSystemAccess } from '@/utils/systemUtils.js'
 import { storeToRefs } from 'pinia'
+import BuyMeACoffee from '@/components/BuyMeACoffee.vue'
 
 const docStore = useDocumentStore()
 const { currentFilename, isDirty } = storeToRefs(docStore)
@@ -116,6 +117,7 @@ const saveDocument = async () => {
     window.alert('Could not save file.')
   }
 }
+
 </script>
 
 <template>
@@ -124,6 +126,7 @@ const saveDocument = async () => {
     <input type="button" value="open" @click="openDocument()" />
     <input type="button" :value="saveLabel" @click="saveDocument()" />
     <span class="filename">{{ fileLabel }}</span>
+    <BuyMeACoffee/>
   </div>
 </template>
 
@@ -136,4 +139,10 @@ const saveDocument = async () => {
 .filename {
   margin-left: 10px;
 }
+
+.menubar {
+  display: flex;
+  align-items: center;
+}
+
 </style>
